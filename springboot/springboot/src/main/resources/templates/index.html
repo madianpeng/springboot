@@ -10,10 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
   <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
-  
-  <script>
-  /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
-  </script>
 </head>
 <body class="layui-layout-body">
   
@@ -46,7 +42,7 @@
           <li class="layui-nav-item" lay-unselect>
             <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
               <i class="layui-icon layui-icon-notice"></i>  
-              
+   
               <!-- 如果有新消息，则显示小圆点 -->
               <span class="layui-badge-dot"></span>
             </a>
@@ -102,10 +98,10 @@
               </a>
               <dl class="layui-nav-child">
                 <dd data-name="console" class="layui-this">
-                  <a lay-href="home/console.html">控制台</a>
+                  <a lay-href="/console">控制台</a>
                 </dd>
                 <dd data-name="console">
-                  <a lay-href="home/homepage1.html">主页一</a>
+                  <a lay-href="/homepage1">主页一</a>
                 </dd>
                 <dd data-name="console">
                   <a lay-href="home/homepage2.html">主页二</a>
@@ -447,10 +443,10 @@
     </div>
   </div>
 
-  <script src="../layuiadmin/layui/layui.js"></script>
+  <script th:src="@{/layui/layui.js}"></script>
   <script>
   layui.config({
-    base: '../layuiadmin/' //静态资源所在路径
+    base: '../' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
   }).use('index');

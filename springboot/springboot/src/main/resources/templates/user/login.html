@@ -1,16 +1,16 @@
 
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>登入 - layuiAdmin</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
-  <link rel="stylesheet" href="../../layuiadmin/style/login.css" media="all">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+  <link rel="stylesheet" th:href="@{/style/admin.css}" media="all">
+  <link rel="stylesheet" th:href="@{/style/login.css}" media="all">
 </head>
 <body>
 
@@ -86,10 +86,10 @@
     
   </div>
 
-  <script src="../../layuiadmin/layui/layui.js"></script>  
+  <script th:src="@{/layui/layui.js}"></script>  
   <script>
   layui.config({
-    base: '../../layuiadmin/' //静态资源所在路径
+    base: '/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
   }).use(['index', 'user'], function(){
@@ -110,33 +110,15 @@
         url: layui.setter.base + 'json/user/login.js' //实际使用请改成服务端真实接口
         ,data: obj.field
         ,done: function(res){
-        
           //请求成功后，写入 access_token
           layui.data(setter.tableName, {
             key: setter.request.tokenName
             ,value: res.data.access_token
           });
-          
-          //登入成功的提示与跳转
-          layer.msg('登入成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.href = '../'; //后台主页
-          });
+          location.href = '../main'; //后台主页
         }
-      });
-      
-    });
-    
-    
-    //实际使用时记得删除该代码
-    layer.msg('为了方便演示，用户名密码可随意输入', {
-      offset: '15px'
-      ,icon: 1
-    });
-    
+      }); 
+    });   
   });
   </script>
 </body>
