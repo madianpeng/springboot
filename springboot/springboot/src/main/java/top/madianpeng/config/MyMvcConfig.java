@@ -13,7 +13,7 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/login").setViewName("user/login");
+		registry.addViewController("/tologin").setViewName("user/login");
 		registry.addViewController("/main").setViewName("index");
 	}
 
@@ -24,7 +24,9 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
 
 	/*
 	 * @Override protected void addInterceptors(InterceptorRegistry registry) {
-	 * registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/*")
-	 * .excludePathPatterns("/tologin","/user/login","/druid/*"); }
+	 * registry.addInterceptor(new
+	 * LoginHandlerInterceptor()).addPathPatterns("/*").excludePathPatterns(
+	 * "/tologin", "/user/login", "/druid/*"); }
 	 */
+
 }
