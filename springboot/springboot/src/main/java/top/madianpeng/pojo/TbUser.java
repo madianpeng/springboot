@@ -20,8 +20,19 @@ public class TbUser {
     private String telephone;
 
     private String remark;
+    
+    private String vercode;
+    
+    
+    public String getVercode() {
+		return vercode;
+	}
 
-    public String getId() {
+	public void setVercode(String vercode) {
+		this.vercode = vercode;
+	}
+
+	public String getId() {
         return id;
     }
 
