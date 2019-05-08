@@ -15,6 +15,7 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
 	protected void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/tologin").setViewName("user/login");
 		registry.addViewController("/main").setViewName("index");
+		registry.addViewController("/console").setViewName("home/console");
 	}
 
 	@Override
