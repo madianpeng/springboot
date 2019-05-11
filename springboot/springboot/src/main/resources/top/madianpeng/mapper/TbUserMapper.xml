@@ -3,12 +3,12 @@
 <mapper namespace="top.madianpeng.mapper.TbUserMapper" >
   <resultMap id="BaseResultMap" type="top.madianpeng.pojo.TbUser" >
     <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="usercode" property="usercode" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="salary" property="salary" jdbcType="DOUBLE" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
-    <result column="station" property="station" jdbcType="VARCHAR" />
     <result column="telephone" property="telephone" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, salary, birthday, gender, station, telephone, remark
+    id, usercode, username, password, email, birthday, gender, telephone, remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.madianpeng.pojo.TbUserExample" >
     select
@@ -104,13 +104,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="top.madianpeng.pojo.TbUser" >
-    insert into tb_user (id, username, password, 
-      salary, birthday, gender, 
-      station, telephone, remark
+    insert into tb_user (id, usercode, username, 
+      password, email, birthday, 
+      gender, telephone, remark
       )
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salary,jdbcType=DOUBLE}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=VARCHAR}, 
-      #{station,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{gender,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="top.madianpeng.pojo.TbUser" >
@@ -119,23 +119,23 @@
       <if test="id != null" >
         id,
       </if>
+      <if test="usercode != null" >
+        usercode,
+      </if>
       <if test="username != null" >
         username,
       </if>
       <if test="password != null" >
         password,
       </if>
-      <if test="salary != null" >
-        salary,
+      <if test="email != null" >
+        email,
       </if>
       <if test="birthday != null" >
         birthday,
       </if>
       <if test="gender != null" >
         gender,
-      </if>
-      <if test="station != null" >
-        station,
       </if>
       <if test="telephone != null" >
         telephone,
@@ -148,23 +148,23 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="salary != null" >
-        #{salary,jdbcType=DOUBLE},
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
         #{birthday,jdbcType=DATE},
       </if>
       <if test="gender != null" >
         #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="station != null" >
-        #{station,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null" >
         #{telephone,jdbcType=VARCHAR},
@@ -186,23 +186,23 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
+      <if test="record.usercode != null" >
+        usercode = #{record.usercode,jdbcType=VARCHAR},
+      </if>
       <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.salary != null" >
-        salary = #{record.salary,jdbcType=DOUBLE},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="record.birthday != null" >
         birthday = #{record.birthday,jdbcType=DATE},
       </if>
       <if test="record.gender != null" >
         gender = #{record.gender,jdbcType=VARCHAR},
-      </if>
-      <if test="record.station != null" >
-        station = #{record.station,jdbcType=VARCHAR},
       </if>
       <if test="record.telephone != null" >
         telephone = #{record.telephone,jdbcType=VARCHAR},
@@ -218,12 +218,12 @@
   <update id="updateByExample" parameterType="map" >
     update tb_user
     set id = #{record.id,jdbcType=VARCHAR},
+      usercode = #{record.usercode,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
-      salary = #{record.salary,jdbcType=DOUBLE},
+      email = #{record.email,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=DATE},
       gender = #{record.gender,jdbcType=VARCHAR},
-      station = #{record.station,jdbcType=VARCHAR},
       telephone = #{record.telephone,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -233,23 +233,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="top.madianpeng.pojo.TbUser" >
     update tb_user
     <set >
+      <if test="usercode != null" >
+        usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="salary != null" >
-        salary = #{salary,jdbcType=DOUBLE},
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
         birthday = #{birthday,jdbcType=DATE},
       </if>
       <if test="gender != null" >
         gender = #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="station != null" >
-        station = #{station,jdbcType=VARCHAR},
       </if>
       <if test="telephone != null" >
         telephone = #{telephone,jdbcType=VARCHAR},
@@ -262,12 +262,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="top.madianpeng.pojo.TbUser" >
     update tb_user
-    set username = #{username,jdbcType=VARCHAR},
+    set usercode = #{usercode,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      salary = #{salary,jdbcType=DOUBLE},
+      email = #{email,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=DATE},
       gender = #{gender,jdbcType=VARCHAR},
-      station = #{station,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
