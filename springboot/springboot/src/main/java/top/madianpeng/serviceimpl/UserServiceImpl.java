@@ -8,6 +8,7 @@ import top.madianpeng.mapper.TbUserMapper;
 import top.madianpeng.pojo.TbUser;
 import top.madianpeng.pojo.TbUserExample;
 import top.madianpeng.service.UserService;
+import top.madianpeng.utils.NonUtil;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 		TbUserExample example = new TbUserExample();
 		example.createCriteria().andUsernameEqualTo(tbUser.getUsername());
 		List<TbUser> list = tbUserMapper.selectByExample(example);
+		if (NonUtil.isNon(list)) {
+			return null;
+		}
 		return list.get(0);
 	}
 

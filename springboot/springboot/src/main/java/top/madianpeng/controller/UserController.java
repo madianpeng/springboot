@@ -98,5 +98,19 @@ public class UserController {
         imageUtil.write(response.getOutputStream());
         return null;
     }
+	
+	/**
+	 * 获取修改资料页面
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("/modifypage")
+	public String modifyPage(Model model,HttpSession session) {
+		TbUser loginUser = (TbUser) session.getAttribute("user");
+		TbUser userinfo = userService.findUserByName(loginUser);
+		model.addAttribute("userinfo", userinfo);
+		return "/set/user/info";
+	}
 
 }

@@ -9,13 +9,13 @@ public class TbUser {
 
     private String password;
 
-    private Double salary;
+    private String email;
 
     private Date birthday;
 
     private String gender;
 
-    private String station;
+    private String usercode;
 
     private String telephone;
 
@@ -56,14 +56,6 @@ public class TbUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public Double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Double salary) {
-        this.salary = salary;
-    }
-
     public Date getBirthday() {
         return birthday;
     }
@@ -78,14 +70,6 @@ public class TbUser {
 
     public void setGender(String gender) {
         this.gender = gender == null ? null : gender.trim();
-    }
-
-    public String getStation() {
-        return station;
-    }
-
-    public void setStation(String station) {
-        this.station = station == null ? null : station.trim();
     }
 
     public String getTelephone() {
@@ -103,4 +87,21 @@ public class TbUser {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsercode() {
+		return usercode;
+	}
+
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
+	}
+    
 }
