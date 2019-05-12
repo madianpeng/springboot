@@ -272,4 +272,13 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <update id="modifyInfo" parameterType="top.madianpeng.pojo.TbUser" >
+  	update tb_user
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR} 
+ 	 where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

@@ -21,7 +21,7 @@ layui.define(['form', 'upload'], function(exports){
   
   //自定义验证
   form.verify({
-    nickname: function(value, item){ //value：表单的值、item：表单的DOM对象
+    usercode: function(value, item){ //value：表单的值、item：表单的DOM对象
       if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
         return '用户名不能有特殊字符';
       }
@@ -85,19 +85,18 @@ layui.define(['form', 'upload'], function(exports){
   
   //设置我的资料
   form.on('submit(setmyinfo)', function(obj){
-    layer.msg(JSON.stringify(obj.field));
-    
+    //layer.msg(JSON.stringify(obj.field));
     //提交修改
-    /*
+    
     admin.req({
-      url: ''
+      url: '/user/modifyinfo'
       ,data: obj.field
-      ,success: function(){
-        
+      ,type: "post"
+      ,success: function(res){
+    	  layer.alert(res.msg); 
       }
-    });
-    */
-    return false;
+    })
+   // return true;
   });
 
   //上传头像
