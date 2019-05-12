@@ -8,5 +8,12 @@ public interface UserService {
 	 * @param tbUser
 	 * @return
 	 */
-	public TbUser findUserByName(TbUser tbUser);
+	public TbUser findUserByCode(TbUser tbUser);
+	
+	/**
+	 * 修改用户信息
+	 * @param tbUser
+	 * @return
+	 */
+	public boolean modifyInfo(TbUser tbUser);
 }

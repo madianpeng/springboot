@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import top.madianpeng.pojo.ReturnValue;
 import top.madianpeng.pojo.TbUser;
 import top.madianpeng.service.UserService;
 import top.madianpeng.utils.ImageUtil;
@@ -40,7 +42,7 @@ public class UserController {
 		if (!tbUser.getVercode().toUpperCase().equals(vercode)) {
 			return "redirect:/user/tologin?msg="+URLEncoder.encode(msg,"UTF-8");
 		}
-		TbUser user = userService.findUserByName(tbUser);
+		TbUser user = userService.findUserByCode(tbUser);
 		msg="用户名或密码不正确";
 		if (NonUtil.isNon(user)) {
 			return "redirect:/user/tologin?msg="+URLEncoder.encode(msg,"UTF-8");
@@ -108,9 +110,22 @@ public class UserController {
 	@GetMapping("/modifypage")
 	public String modifyPage(Model model,HttpSession session) {
 		TbUser loginUser = (TbUser) session.getAttribute("user");
-		TbUser userinfo = userService.findUserByName(loginUser);
+		TbUser userinfo = userService.findUserByCode(loginUser);
 		model.addAttribute("userinfo", userinfo);
 		return "/set/user/info";
+	}
+	/**
+	 * 修改用户资料
+	 * @param tbUser
+	 * @return
+	 */
+	@PostMapping("/modifyinfo")
+	@ResponseBody
+	public Object modifyInfo(TbUser tbUser) {
+		ReturnValue value = new ReturnValue();
+		userService.modifyInfo(tbUser);
+		value.setMsg("修改成功");
+		return value;
 	}
 
 }
