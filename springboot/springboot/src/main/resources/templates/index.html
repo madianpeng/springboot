@@ -92,7 +92,7 @@
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
             <li data-name="home" class="layui-nav-item layui-nav-itemed">
-              <a href="javascript:;" lay-tips="主页" lay-direction="2">
+              <a href="javascript:;" lay-tips="主页" lay-direction="2" class="layui-this">
                 <i class="layui-icon layui-icon-home"></i>
                 <cite>主页</cite>
               </a>
@@ -109,13 +109,13 @@
               </dl>
               -->
             </li>
-            <li data-name="basicdata" class="layui-nav-item layui-nav-itemed">
+            <li data-name="basicdata" class="layui-nav-item">
               <a href="javascript:;" lay-tips="基础数据" lay-direction="2">
                 <i class="layui-icon layui-icon-app"></i>
                 <cite>基础数据</cite>
               </a>
               <dl class="layui-nav-child">
-                <dd data-name="console" class="layui-this">
+                <dd data-name="console" >
                   <a lay-href="/staff">取派员管理</a>
                 </dd>
                 <dd data-name="console">
