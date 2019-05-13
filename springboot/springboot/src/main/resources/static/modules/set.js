@@ -93,10 +93,10 @@ layui.define(['form', 'upload'], function(exports){
       ,data: obj.field
       ,type: "post"
       ,success: function(res){
-    	  layer.alert(res.msg); 
-      }
-    })
-   // return true;
+    	  layer.msg(res.msg);
+    	 }
+      })
+      return false;
   });
 
   //上传头像
