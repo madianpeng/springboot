@@ -12,6 +12,7 @@ import top.madianpeng.mapper.BcStaffMapper;
 import top.madianpeng.pojo.BcStaff;
 import top.madianpeng.pojo.PageBean;
 import top.madianpeng.service.StaffService;
+import top.madianpeng.utils.NonUtil;
 @Service
 @Transactional
 public class StaffServiceImpl implements StaffService {
@@ -22,7 +23,10 @@ public class StaffServiceImpl implements StaffService {
 	
 	@Override
 	public PageBean<BcStaff> queryStaff(BcStaff staff) {
-		staff.setName("%"+staff.getName()+"%");
+		if (NonUtil.isNotNon(staff.getName())) {
+			staff.setName("%"+staff.getName()+"%");
+		}
+		
 		List<BcStaff> list = new ArrayList<BcStaff>();
 		PageBean<BcStaff> bean = new PageBean<BcStaff>();
 		try {

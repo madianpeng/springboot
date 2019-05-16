@@ -19,7 +19,7 @@ layui.define(['table', 'form'], function(exports){
     ,url: layui.setter.base + 'json/useradmin/webuser.js' //模拟接口
     ,cols: [[
       {type: 'checkbox', fixed: 'left'}
-      ,{field: 'id', width: 100, title: 'ID', sort: true}
+      ,{field: 'id', width: 20%, title: 'ID', sort: true}
       ,{field: 'username', title: '用户名', minWidth: 100}
       ,{field: 'avatar', title: '头像', width: 100, templet: '#imgTpl'}
       ,{field: 'phone', title: '手机'}
