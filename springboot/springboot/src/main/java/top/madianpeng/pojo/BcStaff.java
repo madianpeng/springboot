@@ -1,7 +1,10 @@
 package top.madianpeng.pojo;
 
-public class BcStaff {
-    private String id;
+public class BcStaff extends Pageweb{
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String name;
 

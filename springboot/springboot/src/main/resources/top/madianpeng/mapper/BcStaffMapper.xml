@@ -71,6 +71,29 @@
   <sql id="Base_Column_List" >
     id, name, telephone, haspda, deltag, station, standard
   </sql>
+  <sql id="Where_condition">
+  	<if test="id != null" >
+        and id=#{id,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name LIKE #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="telephone != null" >
+        and telephone=#{telephone,jdbcType=VARCHAR}
+      </if>
+      <if test="haspda != null" >
+       and haspda=#{haspda,jdbcType=CHAR}
+      </if>
+      <if test="deltag != null" >
+        and deltag=#{deltag,jdbcType=CHAR}
+      </if>
+      <if test="station != null" >
+        and station=#{station,jdbcType=VARCHAR}
+      </if>
+      <if test="standard != null" >
+        and standard=#{standard,jdbcType=VARCHAR}
+      </if>
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.madianpeng.pojo.BcStaffExample" >
     select
     <if test="distinct" >
@@ -240,4 +263,12 @@
       standard = #{standard,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="queryStaff" resultType="BcStaff" parameterType="BcStaff" >
+    select
+    <include refid="Base_Column_List" />
+    from bc_staff
+ 	<where>
+ 		<include refid="Where_condition" />
+ 	</where>
+  </select>
 </mapper>
