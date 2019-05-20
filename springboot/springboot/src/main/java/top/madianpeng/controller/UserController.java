@@ -27,7 +27,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	/**
 	 * 用户登录
 	 * @param tbUser

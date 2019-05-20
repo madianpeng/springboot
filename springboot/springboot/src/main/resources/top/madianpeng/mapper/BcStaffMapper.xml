@@ -72,10 +72,10 @@
     id, name, telephone, haspda, deltag, station, standard
   </sql>
   <sql id="Where_condition">
-  	<if test="id != null" >
+  	<if test="id != null and id !=''" >
         and id=#{id,jdbcType=VARCHAR}
       </if>
-      <if test="name != null" >
+      <if test="name != null and name !=''" >
         and name LIKE #{name,jdbcType=VARCHAR}
       </if>
       <if test="telephone != null" >
@@ -87,7 +87,7 @@
       <if test="deltag != null" >
         and deltag=#{deltag,jdbcType=CHAR}
       </if>
-      <if test="station != null" >
+      <if test="station != null and station !=''" >
         and station=#{station,jdbcType=VARCHAR}
       </if>
       <if test="standard != null" >
@@ -270,5 +270,9 @@
  	<where>
  		<include refid="Where_condition" />
  	</where>
+  </select>
+  
+  <select id="queryCount" resultType="Integer">
+  	SELECT COUNT(*) FROM bc_staff
   </select>
 </mapper>

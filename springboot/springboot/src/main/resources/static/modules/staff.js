@@ -1,6 +1,6 @@
 /**
 
- @Name：layuiAdmin 用户管理 管理员管理 角色管理
+ @Name：取派员管理
  @Author：star1029
  @Site：http://www.layui.com/admin/
  @License：LPPL
@@ -15,9 +15,9 @@ layui.define(['table', 'form'], function(exports){
 
   //执行一个 table 实例
   table.render({
-    elem: '#LAY-user-manage'
-    ,limit: 30
-    ,height: 'full-220'
+    elem: '#LAY-staff-manage'
+    ,limit: 10
+    ,height: 'full-20'
     ,text: '对不起，加载出现异常！'
     ,url: '/staff/querylist' //数据接口
     ,title: '用户表'
@@ -25,19 +25,19 @@ layui.define(['table', 'form'], function(exports){
     ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
     ,totalRow: true //开启合计行
     ,cols: [[ //表头
-      {type: 'checkbox', fixed: 'left'}
-      ,{field: 'id', title: 'ID', width:'10%', fixed: 'left'}
+      {width: '5%',type: 'checkbox', fixed: 'left'}
+      ,{field: 'id', title: 'ID', width:'10%'}
       ,{field: 'name', title: '姓名', width:'10%'}
-      ,{field: 'telephone', title: '电话', width: '10%'}
-      ,{field: 'haspda', title: '不知', width:'10%'}
-      ,{field: 'deltag', title: '是否删除', width: '10%'}
-      ,{field: 'station', title: '站点', width:'10%'} 
-      ,{field: 'standard', title: '标准', width: '10%'}
-      ,{width: '30%', align:'center', toolbar: '#barDemo'}
+      ,{field: 'telephone', title: '电话', width: '15%'}
+      ,{field: 'haspda', title: '是否有PDA', width:'10%'}
+      ,{field: 'deltag', title: '是否作废', width: '10%'}
+      ,{field: 'station', title: '所属单位', width:'10%'} 
+      ,{field: 'standard', title: '取派标准', width: '10%'}
+      ,{width: '20%', align:'center', toolbar: '#table-staff-webuser'}
     ]]
   });
   //监听工具条
-  table.on('tool(LAY-user-manage)', function(obj){
+  table.on('tool(LAY-staff-manage)', function(obj){
     var data = obj.data;
     if(obj.event === 'del'){
       layer.prompt({
@@ -87,21 +87,21 @@ layui.define(['table', 'form'], function(exports){
 
   
   //监听头工具栏事件
-  table.on('toolbar(LAY-user-manage)', function(obj){
+  table.on('toolbar(LAY-staff-manage)', function(obj){
     var checkStatus = table.checkStatus(obj.config.id)
     ,data = checkStatus.data; //获取选中的数据
     switch(obj.event){
       case 'add':
           layer.open({
               type: 2
-              ,title: '添加用户'
-              ,content: 'userform.html'
+              ,title: '添加取派员'
+              ,content: '/staffform'
               ,maxmin: true
-              ,area: ['500px', '450px']
+              ,area: ['600px', '450px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]
-                ,submitID = 'LAY-user-front-submit'
+                ,submitID = 'LAY-staff-front-submit'
                 ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
                 //监听提交
@@ -110,6 +110,7 @@ layui.define(['table', 'form'], function(exports){
                   
                   //提交 Ajax 成功后，静态更新表格中的数据
                   //$.ajax({});
+ 
                   table.reload('LAY-user-front-submit'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
@@ -165,5 +166,5 @@ layui.define(['table', 'form'], function(exports){
     };
   });
   
-  exports('useradmin', {})
+  exports('staff', {})
 });

@@ -29,4 +29,6 @@ public interface BcStaffMapper {
     int updateByPrimaryKey(BcStaff record);
     
     List<BcStaff> queryStaff(BcStaff bcStaff);
+
+	int queryCount();
 }

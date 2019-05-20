@@ -8,6 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import top.madianpeng.mapper.BcStaffMapper;
 import top.madianpeng.pojo.BcStaff;
 import top.madianpeng.pojo.PageBean;
@@ -23,14 +27,18 @@ public class StaffServiceImpl implements StaffService {
 	
 	@Override
 	public PageBean<BcStaff> queryStaff(BcStaff staff) {
+		
 		if (NonUtil.isNotNon(staff.getName())) {
 			staff.setName("%"+staff.getName()+"%");
 		}
 		
 		List<BcStaff> list = new ArrayList<BcStaff>();
 		PageBean<BcStaff> bean = new PageBean<BcStaff>();
+		int count = 0;
 		try {
+			PageHelper.startPage(staff.getPage(), staff.getLimit());
 			list= mapper.queryStaff(staff);
+			 count = mapper.queryCount();
 		} catch (Exception e) {
 			logger.error("取派员查询异常："+e.toString());
 			bean.setCode(1);
@@ -38,7 +46,7 @@ public class StaffServiceImpl implements StaffService {
 			return bean;
 		}
 		
-		bean.setCount(list.size());
+		bean.setCount(count);
 		bean.setData(list);
 		bean.setMsg("查询成功");
 		return bean;

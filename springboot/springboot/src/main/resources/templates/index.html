@@ -64,7 +64,8 @@
           </li>
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
-              <cite th:text="${session.user.username}"></cite>
+             <!--  <cite th:text="${session.user.username}"></cite> -->
+              <cite th:text="后来"></cite>
             </a>
             <dl class="layui-nav-child">
               <dd><a lay-href="/user/modifypage">基本资料</a></dd>
@@ -129,7 +130,7 @@
             <li data-name="component" class="layui-nav-item">
               <a href="javascript:;" lay-tips="组件" lay-direction="2">
                 <i class="layui-icon layui-icon-component"></i>
-                <cite>基础数据</cite>
+                <cite>组件</cite>
               </a>
               <dl class="layui-nav-child">
                 <dd data-name="grid">
@@ -383,7 +384,7 @@
               </a>
               <dl class="layui-nav-child">
                 <dd>
-                  <a lay-href="user/user/list.html">网站用户</a>
+                  <a lay-href="/userlist">网站用户</a>
                 </dd>
                 <dd>
                   <a lay-href="user/administrators/list.html">后台管理员</a>
