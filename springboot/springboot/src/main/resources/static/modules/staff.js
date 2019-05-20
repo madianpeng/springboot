@@ -63,13 +63,13 @@ layui.define(['table', 'form'], function(exports){
         ,btn: ['确定', '取消']
         ,yes: function(index, layero){
           var iframeWindow = window['layui-layer-iframe'+ index]
-          ,submitID = 'LAY-user-front-submit'
+          ,submitID = 'LAY-staff-front-submit'
           ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
           //监听提交
           iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
             var field = data.field; //获取提交的字段
-            
+            layer.alert(field);
             //提交 Ajax 成功后，静态更新表格中的数据
             //$.ajax({});
             table.reload('LAY-user-front-submit'); //数据刷新
@@ -111,7 +111,7 @@ layui.define(['table', 'form'], function(exports){
                   //提交 Ajax 成功后，静态更新表格中的数据
                   //$.ajax({});
  
-                  table.reload('LAY-user-front-submit'); //数据刷新
+                  table.reload('LAY-staff-front-submit'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
                 

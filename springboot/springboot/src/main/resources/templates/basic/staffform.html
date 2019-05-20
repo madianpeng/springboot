@@ -39,12 +39,27 @@
       </div>
       <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button> 
     </div> -->
-    <div class="layui-form-item" lay-filter="deltag">
-      <label class="layui-form-label">选择性别</label>
-      <div class="layui-input-block">
-        <input type="radio" name="deltag" value="0" title="否" checked>
-        <input type="radio" name="deltag" value="1" title="是">
-      </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">所属区域</label>
+        <div class="layui-input-inline">
+           <select name="station" lay-verify="required" lay-filter="station" autocomplete="off">
+             <option disabled="disabled" selected="selected"></option>
+             <option value="中州">中州</option>
+             <option value="青阳镇">青阳镇</option>
+             <option value="加玛帝国">加玛帝国</option>
+           </select>
+       </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">收费标准</label>
+        <div class="layui-input-inline">
+           <select name="standard" lay-verify="required" >
+             <option disabled="disabled" selected="selected" value="">请选设</option>
+             <option value="6-10">6-10</option>
+             <option value="11-20">11-20</option>
+             <option value="21-30">21-30</option>
+           </select>
+       </div>
     </div>
     <div class="layui-form-item layui-hide">
       <input type="button" lay-submit lay-filter="LAY-staff-front-submit" id="LAY-staff-front-submit" value="确认">
