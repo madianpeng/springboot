@@ -40,24 +40,30 @@ layui.define(['table', 'form'], function(exports){
   table.on('tool(LAY-staff-manage)', function(obj){
     var data = obj.data;
     if(obj.event === 'del'){
-      layer.prompt({
-        formType: 1
-        ,title: '敏感操作，请验证口令'
-      }, function(value, index){
-        layer.close(index);
-        
         layer.confirm('真的删除行么', function(index){
-          obj.del();
-          layer.close(index);
+      	  var ids=new Array()
+		  ids.push(obj.data.id);
+          $.ajax({
+        	  type: "post",
+        	  url: "/staff/delstaff",
+        	  data:	{
+        		  ids:ids
+        	  },
+        	  traditional: true,
+        	  success:function(res) {
+				layer.msg(res.msg);
+			}
+          });
+          table.reload('LAY-staff-manage'); //数据刷新
         });
-      });
+     
     } else if(obj.event === 'edit'){
       var tr = $(obj.tr);
-
+      //layer.alert('编辑行：<br>'+ JSON.stringify(obj.data))
       layer.open({
         type: 2
-        ,title: '编辑用户'
-        ,content: '../../../views/user/user/userform.html'
+        ,title: '编辑取派员'
+        ,content: '/staff/modifypage?id='+obj.data.id
         ,maxmin: true
         ,area: ['500px', '450px']
         ,btn: ['确定', '取消']
@@ -69,10 +75,17 @@ layui.define(['table', 'form'], function(exports){
           //监听提交
           iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
             var field = data.field; //获取提交的字段
-            layer.alert(field);
             //提交 Ajax 成功后，静态更新表格中的数据
             //$.ajax({});
-            table.reload('LAY-user-front-submit'); //数据刷新
+            $.ajax({
+            	   type: "POST",
+            	   url: "/staff/modifystaff",
+            	   data: field,
+            	   success: function(res){
+            	     layer.msg(res.msg);
+            	   }
+            	})
+            table.reload('LAY-staff-manage'); //数据刷新
             layer.close(index); //关闭弹层
           });  
           
@@ -110,8 +123,16 @@ layui.define(['table', 'form'], function(exports){
                   
                   //提交 Ajax 成功后，静态更新表格中的数据
                   //$.ajax({});
+                  $.ajax({
+                	   type: "POST",
+                	   url: "/staff/addstaff",
+                	   data: field,
+                	   success: function(res){
+                	     layer.msg(res.msg);
+                	   }
+                	})
  
-                  table.reload('LAY-staff-front-submit'); //数据刷新
+                  table.reload('LAY-staff-manage'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
                 
@@ -125,17 +146,17 @@ layui.define(['table', 'form'], function(exports){
         } else if(data.length > 1){
           layer.msg('只能同时编辑一个');
         } else {
-          layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+          //layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
           layer.open({
               type: 2
-              ,title: '编辑用户'
-              ,content: '../../../views/user/user/userform.html'
+              ,title: '编辑取派员'
+              ,content: '/staff/modifypage?id='+checkStatus.data[0].id
               ,maxmin: true
-              ,area: ['500px', '450px']
+              ,area: ['600px', '450px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]
-                ,submitID = 'LAY-user-front-submit'
+                ,submitID = 'LAY-staff-front-submit'
                 ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
                 //监听提交
@@ -144,7 +165,15 @@ layui.define(['table', 'form'], function(exports){
                   
                   //提交 Ajax 成功后，静态更新表格中的数据
                   //$.ajax({});
-                  table.reload('LAY-user-front-submit'); //数据刷新
+                  $.ajax({
+               	   type: "POST",
+               	   url: "/staff/modifystaff",
+               	   data: field,
+               	   success: function(res){
+               	     layer.msg(res.msg);
+               	   }
+               	})
+                  table.reload('LAY-staff-manage'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
                 
@@ -160,7 +189,25 @@ layui.define(['table', 'form'], function(exports){
         if(data.length === 0){
           layer.msg('请选择一行');
         } else {
-          layer.msg('删除');
+          layer.confirm('确定要删除这'+data.length+'行？', function(index){
+        	  var ids=new Array()
+              var length=checkStatus.data.length;
+              for (var i = 0; i<length; i++) {
+    			ids.push(checkStatus.data[i].id);
+              }
+              $.ajax({
+            	  type: "post",
+            	  url: "/staff/delstaff",
+            	  data:	{
+            		  ids:ids
+            	  },
+            	  traditional: true,
+            	  success:function(res) {
+    				layer.msg(res.msg);
+    			}
+              });
+              table.reload('LAY-staff-manage'); //数据刷新
+          });
         }
       break;
     };

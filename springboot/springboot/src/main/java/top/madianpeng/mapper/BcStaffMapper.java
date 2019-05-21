@@ -31,4 +31,6 @@ public interface BcStaffMapper {
     List<BcStaff> queryStaff(BcStaff bcStaff);
 
 	int queryCount();
+
+	int delStaff(List<String> idsList);
 }

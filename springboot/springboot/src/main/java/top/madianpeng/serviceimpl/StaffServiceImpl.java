@@ -15,7 +15,9 @@ import com.github.pagehelper.PageInfo;
 import top.madianpeng.mapper.BcStaffMapper;
 import top.madianpeng.pojo.BcStaff;
 import top.madianpeng.pojo.PageBean;
+import top.madianpeng.pojo.ReturnValue;
 import top.madianpeng.service.StaffService;
+import top.madianpeng.utils.IDUtils;
 import top.madianpeng.utils.NonUtil;
 @Service
 @Transactional
@@ -50,6 +52,57 @@ public class StaffServiceImpl implements StaffService {
 		bean.setData(list);
 		bean.setMsg("查询成功");
 		return bean;
+	}
+
+	@Override
+	public ReturnValue addStaff(BcStaff staff) {
+		ReturnValue returnValue = new ReturnValue();
+		String id = IDUtils.getId();
+		staff.setId(id);
+		try {
+			mapper.insert(staff);
+		} catch (Exception e) {
+			logger.error("添加取派员异常"+e.toString());
+			returnValue.isFail("添加");
+			return returnValue;
+		}
+		returnValue.isSuccess("添加");
+		return returnValue;
+	}
+
+	@Override
+	public BcStaff queryByID(BcStaff staff) {
+		BcStaff bcStaff = mapper.selectByPrimaryKey(staff.getId());
+		return bcStaff;
+	}
+
+	@Override
+	public ReturnValue modifyStaff(BcStaff bcStaff) {
+		ReturnValue returnValue = new ReturnValue();
+		try {
+			mapper.updateByPrimaryKey(bcStaff);
+		} catch (Exception e) {
+			logger.error("修改取派员异常"+e.toString());
+			returnValue.isFail("修改");
+			return returnValue;
+		}
+		returnValue.isSuccess("修改");
+		return returnValue;
+	}
+
+	@Override
+	public ReturnValue delStaff(List<String> idsList) {
+		ReturnValue returnValue = new ReturnValue();
+		try {
+			int i = mapper.delStaff(idsList);
+			logger.info("删除"+i+"条");
+		} catch (Exception e) {
+			logger.error("删除取派员异常: "+e.toString());
+			returnValue.isFail("删除");
+			return returnValue;
+		}
+		returnValue.isSuccess("删除");
+		return returnValue;
 	}
 
 }

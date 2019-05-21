@@ -2,7 +2,7 @@ package top.madianpeng.pojo;
 
 public class ReturnValue {
 	public int code=0;
-	public String msg;
+	public String msg="成功";
 
 
 	public int getCode() {
@@ -16,6 +16,14 @@ public class ReturnValue {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public void isFail(String msg) {
+		this.msg = msg+"失败";
+		this.code = 1;
+	}
+	public void isSuccess(String msg) {
+		this.msg = msg+"成功";
+		this.code = 0;
 	}
 	
 }
