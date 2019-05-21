@@ -72,6 +72,11 @@ public class StaffController {
 		
 	}
 	
+	/**
+	 * 删除取派员
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping("/delstaff")
 	@ResponseBody
 	public ReturnValue delStaff(String[] ids) {

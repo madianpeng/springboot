@@ -40,7 +40,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			PageHelper.startPage(staff.getPage(), staff.getLimit());
 			list= mapper.queryStaff(staff);
-			 count = mapper.queryCount();
+			count = mapper.queryCount();
 		} catch (Exception e) {
 			logger.error("取派员查询异常："+e.toString());
 			bean.setCode(1);
