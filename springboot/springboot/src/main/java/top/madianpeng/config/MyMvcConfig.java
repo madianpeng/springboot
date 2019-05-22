@@ -16,14 +16,15 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
 		registry.addViewController("/tologin").setViewName("user/login");
 		registry.addViewController("/main").setViewName("index");
 		registry.addViewController("/console").setViewName("home/homepage2");
-		registry.addViewController("/staff").setViewName("basic/staff");
-		registry.addViewController("/staffform").setViewName("basic/staffform");
+		registry.addViewController("/staff").setViewName("basic/staff/staff");
+		registry.addViewController("/staffform").setViewName("basic/staff/staffform");
 		registry.addViewController("/userlist").setViewName("user/user/list");
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+		registry.addResourceHandler("/imgs/**").addResourceLocations("file:D:/imgs/");
 	}
 
 	/*

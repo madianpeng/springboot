@@ -39,13 +39,17 @@
         <input type="radio" name="deltag" value="否" title="否" checked>
       </div>
     </div>
-<!--     <div class="layui-form-item">
-      <label class="layui-form-label">头像</label>
-      <div class="layui-input-inline">
-        <input type="text" name="avatar" lay-verify="required" placeholder="请上传图片" autocomplete="off" class="layui-input" >
-      </div>
-      <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button> 
-    </div> -->
+    <div class="layui-form-item">
+      <label class="layui-form-label">头像</label>  
+      <button style="float: left;" type="button" class="layui-btn" id="pictureFile">上传图片</button> 
+      <input type="hidden" name="img" value="" >
+    </div>
+    <div class="layui-form-item" style="display: none;" id="showpic">
+        <label class="layui-form-label">预览图</label> 
+        <div class="layui-upload-list">
+       	  <img class="layui-upload-img" height="100px" width="100px" id="demo1">
+      	</div>
+    </div>
     <div class="layui-form-item">
       <label class="layui-form-label">所属区域</label>
         <div class="layui-input-inline">
@@ -102,14 +106,20 @@
         }
 })
     upload.render({
-      elem: '#layuiadmin-upload-useradmin'
-      ,url: layui.setter.base + 'json/upload/demo.js'
+      elem: '#pictureFile'
+      ,url: layui.setter.base + 'imgupload'
       ,accept: 'images'
-      ,method: 'get'
+      ,method: 'post'
       ,acceptMime: 'image/*'
+      ,before: function(obj){ 
+    	  //预读本地文件示例，不支持ie8 
+    	  obj.preview(function(res, file, result){
+    		 $("#showpic").show();
+    		 $('#demo1').attr('src', result); //图片链接（base64）
+    	 	}); 
+    	  }
       ,done: function(res){
-        $(this.item).prev("div").children("input").val(res.data.src)
-      }
+    	$("input[name='img']").val(res.picid); }
     });
   })
   </script>

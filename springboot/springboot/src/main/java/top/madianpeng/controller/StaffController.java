@@ -55,7 +55,7 @@ public class StaffController {
 	public String modifyPage(BcStaff staff,Model model) {
 		BcStaff pageinfo = staffService.queryByID(staff);
 		model.addAttribute("staff", pageinfo);
-		return "/basic/modifyform";
+		return "/basic/staff/modifyform";
 		
 	}
 	
