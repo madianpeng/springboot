@@ -22,7 +22,7 @@ layui.define(['table', 'form'], function(exports){
     ,url: '/staff/querylist' //数据接口
     ,title: '用户表'
     ,page: true //开启分页
-    ,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+    ,toolbar: '#toolbarDemo' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
     ,totalRow: true //开启合计行
     ,cols: [[ //表头
       {width: '5%',type: 'checkbox', fixed: 'left'}
