@@ -1,5 +1,7 @@
 package top.madianpeng.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import top.madianpeng.pojo.BcStaff;
 import top.madianpeng.pojo.PageBean;
 import top.madianpeng.pojo.ReturnValue;
 import top.madianpeng.service.StaffService;
+import top.madianpeng.utils.POIUtils;
 
 @Controller
 @RequestMapping("/staff")
@@ -83,6 +88,5 @@ public class StaffController {
 		List<String> idsList = Arrays.asList(ids);
 		ReturnValue returnValue = staffService.delStaff(idsList);
 		return returnValue;
-	}
-	
+	}	
 }

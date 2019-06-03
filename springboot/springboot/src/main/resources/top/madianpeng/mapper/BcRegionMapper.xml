@@ -240,4 +240,37 @@
       citycode = #{citycode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="queryRegion" parameterType="BcRegion" resultType="BcRegion">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from bc_region
+  	<where>
+  		<if test="id !=null and id !=''" >
+  			and id = #{id}
+  		</if>
+  		<if test="province !=null and province !=''" >
+  			and province like #{province}
+  		</if>
+  		<if test="city !=null and city !=''" >
+  			and city like #{city}
+  		</if>
+  		<if test="district !=null and district !=''" >
+  			and district like #{district}
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="queryCount" resultType="Integer">
+  	select count(0) from bc_region
+  </select>
+  <insert id="importAdd" parameterType="BcRegion"> 
+  	insert into bc_region (id, province, city,district, postcode, shortcode, citycode)
+    values 
+    <foreach collection="list" item="region" index="index" separator=",">
+   	 (#{region.id,jdbcType=VARCHAR}, #{region.province,jdbcType=VARCHAR}, #{region.city,jdbcType=VARCHAR}, 
+   	 #{region.district,jdbcType=VARCHAR}, #{region.postcode,jdbcType=VARCHAR}, 
+   	 #{region.shortcode,jdbcType=VARCHAR}, #{region.citycode,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
 </mapper>

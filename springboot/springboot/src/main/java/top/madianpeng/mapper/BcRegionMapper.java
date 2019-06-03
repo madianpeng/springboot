@@ -27,4 +27,10 @@ public interface BcRegionMapper {
     int updateByPrimaryKeySelective(BcRegion record);
 
     int updateByPrimaryKey(BcRegion record);
+    
+    List<BcRegion> queryRegion(BcRegion region);
+    
+    int queryCount();
+
+	int importAdd(List<BcRegion> regionlist);
 }

@@ -1,6 +1,6 @@
 package top.madianpeng.pojo;
 
-public class BcRegion {
+public class BcRegion extends Pageweb {
     private String id;
 
     private String province;

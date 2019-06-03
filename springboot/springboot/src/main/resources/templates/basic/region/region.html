@@ -18,19 +18,25 @@
       <div class="layui-form layui-card-header layuiadmin-card-header-auto">
         <div class="layui-form-item">
           <div class="layui-inline">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">省</label>
             <div class="layui-input-block">
-              <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
+              <input type="text" name="province" placeholder="请输入" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-inline">
-            <label class="layui-form-label">站点</label>
+            <label class="layui-form-label">市</label>
             <div class="layui-input-block">
-              <input type="text" name="station" placeholder="请输入" autocomplete="off" class="layui-input">
+              <input type="text" name="city" placeholder="请输入" autocomplete="off" class="layui-input">
             </div>
           </div>
           <div class="layui-inline">
-            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-staff-front-search">
+            <label class="layui-form-label">区</label>
+            <div class="layui-input-block">
+              <input type="text" name="district" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-inline">
+            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-region-front-search">
               <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
             </button>
           </div>
@@ -38,7 +44,7 @@
       </div>
       
       <div class="layui-card-body">
-        <table id="LAY-staff-manage" lay-filter="LAY-staff-manage"></table>
+        <table id="LAY-region-manage" lay-filter="LAY-region-manage"></table>
         <script type="text/html" id="toolbarDemo">
   		  <div class="layui-btn-container">
             <button class="layui-btn layui-btn-primary layui-btn-sm" lay-event="add"><i class="layui-icon"></i></button>
@@ -50,7 +56,7 @@
         <script type="text/html" id="imgTpl"> 
           <img style="display: inline-block; width: 50%; height: 100%;" src= {{ d.avatar }}>
         </script> 
-        <script type="text/html" id="table-staff-webuser">
+        <script type="text/html" id="table-region-webuser">
           <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
           <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
@@ -64,29 +70,30 @@
     base: '/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
-  }).use(['index', 'staff', 'table','upload'], function(){
+  }).use(['index', 'region', 'table','upload'], function(){
     var $ = layui.$
     ,form = layui.form
     ,table = layui.table
     ,upload = layui.upload ;
     
     //监听搜索
-    form.on('submit(LAY-staff-front-search)', function(data){
+    form.on('submit(LAY-region-front-search)', function(data){
       var field = data.field;
       
       //执行重载
-      table.reload('LAY-staff-manage', {
+      table.reload('LAY-region-manage', {
         where: field
       });
     });
     //文件上传
     upload.render({ //允许上传的文件后缀
         elem: '#upload'
-        ,url: 'staff/import'
+        ,url: 'region/import'
         ,accept: 'file' //普通文件
         ,exts: 'xls|xlsx' //只允许上传压缩文件
         ,done: function(res){
-          console.log(res)
+          layer.msg(res.msg);
+          table.reload('LAY-region-manage');
         }
       });
   });

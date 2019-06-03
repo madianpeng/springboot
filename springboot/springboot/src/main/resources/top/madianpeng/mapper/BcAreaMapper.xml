@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.madianpeng.mapper.BcAreaMapper" >
+
+  <sql id="Base_Column_List" >
+    areaid, areacode, areaname, level, citycode, parentid
+  </sql>
+  
+  <select id="queryArea" resultType="BcArea" parameterType="BcArea" >
+    select
+    <include refid="Base_Column_List" />
+    from bc_area
+	<where>
+    	<if test="areaid != null and areaid !=''" >
+    	and areaid= #{areaid}
+    	</if>
+    	<if test="areacode != null and areacode !=''" >
+    	and areacode= #{areacode}
+    	</if>
+    	<if test="level != null and level !=''" >
+    	and level= #{level}
+    	</if>
+    	<if test="parentid != null and parentid !=''" >
+    	and parentid= #{parentid}
+    	</if>
+     </where>
+     order by areaid
+  </select>
+  
+</mapper>
