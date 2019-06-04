@@ -27,4 +27,9 @@ public interface BcSubareaMapper {
     int updateByPrimaryKeySelective(BcSubarea record);
 
     int updateByPrimaryKey(BcSubarea record);
-}
+
+	List<BcSubarea> querySubarea(BcSubarea subarea);
+
+	int delSubarea(List<String> id);
+	
+}	

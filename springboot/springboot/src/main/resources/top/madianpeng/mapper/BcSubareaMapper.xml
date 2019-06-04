@@ -87,10 +87,14 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from bc_subarea
-    where id = #{id,jdbcType=VARCHAR}
+  	SELECT
+	a.*  , b.areaid district,c.areaid city,d.areaid province
+	FROM
+	bc_subarea a
+	LEFT JOIN bc_area b ON a.region_id = b.areaid
+	LEFT JOIN bc_area c ON b.parentid = c.areaid
+	LEFT JOIN bc_area d ON c.parentid = d.areaid
+    where a.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from bc_subarea
@@ -255,4 +259,46 @@
       position = #{position,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="querySubarea" parameterType="BcSubarea" resultType="BcSubarea">
+  	SELECT
+	a.*  , b.areaname district,c.areaname city,d.areaname province
+	FROM
+	bc_subarea a
+	LEFT JOIN bc_area b ON a.region_id = b.areaid
+	LEFT JOIN bc_area c ON b.parentid = c.areaid
+	LEFT JOIN bc_area d ON c.parentid = d.areaid
+	<where>
+		<if test="id !=null and id !=''" >
+  			and a.id = #{id}
+  		</if>
+  		<if test="province !=null and province !=''" >
+  			and a.province like #{province}
+  		</if>
+  		<if test="city !=null and city !=''" >
+  			and a.city like #{city}
+  		</if>
+  		<if test="single !=null and single !=''" >
+  			and a.single = #{single}
+  		</if>
+  		<if test="addresskey !=null and addresskey !=''" >
+  			and a.addresskey like #{addresskey}
+  		</if>
+  		<if test="position !=null and position !=''" >
+  			and a.position like #{position}
+  		</if>
+	</where>
+  	
+  </select>
+  <select id="queryCount" resultType="Integer">
+  	select count(0) from bc_subarea
+  </select>
+  <delete id="delSubarea">
+  	delete from bc_subarea
+  	<where>
+  		<foreach collection="list" item="id" open="id in (" separator="," close=")">
+  			#{id}
+  		</foreach>
+  	</where>
+  </delete>
 </mapper>

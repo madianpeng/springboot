@@ -1,7 +1,12 @@
 package top.madianpeng.pojo;
 
-public class BcSubarea {
-    private String id;
+public class BcSubarea extends Pageweb{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String decidedzoneId;
 
@@ -16,6 +21,12 @@ public class BcSubarea {
     private String single;
 
     private String position;
+    
+    private String province;
+    
+    private String city;
+    
+    private String district;
 
     public String getId() {
         return id;
@@ -80,4 +91,30 @@ public class BcSubarea {
     public void setPosition(String position) {
         this.position = position == null ? null : position.trim();
     }
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+    
+    
 }

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<title>添加区域</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+	</head>
+
+	<body>
+
+		<div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+			<div class="layui-form-item">
+				<label class="layui-form-label">省</label>
+				<div class="layui-input-inline">
+					<select id="province" lay-verify="required" lay-filter="province" autocomplete="off"></select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">市</label>
+				<div class="layui-input-inline">
+					<select id="city" lay-verify="required" lay-filter="city" autocomplete="off"></select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">区</label>
+				<div class="layui-input-inline">
+					<select name="regionId" id="district" lay-verify="required" lay-filter="district" autocomplete="off"></select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">关键字</label>
+				<div class="layui-input-inline">
+					 <input type="text" name="addresskey" id="addresskey" lay-verify="required"  autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">起始号</label>
+				<div class="layui-input-inline">
+					 <input type="text" name="startnum" id="startnum"  autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">终止号</label>
+				<div class="layui-input-inline">
+					 <input type="text" name="endnum" id="endnum" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">单双号</label>
+				<div class="layui-input-inline">
+					 <select name="single" id="single" lay-verify="required" lay-filter="district" autocomplete="off">
+					 	<option value="单号">单号</option>
+					 	<option value="双号">双号</option>
+					 </select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">位置</label>
+				<div class="layui-input-inline">
+					 <input type="text" name="position" id="position" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item layui-hide">
+				<input type="button" lay-submit lay-filter="LAY-subarea-front-submit" id="LAY-subarea-front-submit" value="确认">
+			</div>
+		</div>
+
+		<script th:src="@{/layui/layui.js}"></script>
+		<script>
+			layui.config({
+				base: '/' //静态资源所在路径
+			}).extend({
+				index: 'lib/index' //主入口模块
+			}).use(['index', 'form'], function() {
+				var $ = layui.$;
+				var form = layui.form;
+				var provinceText = "";
+				var cityText = "";
+				var areaText = "";
+				//异步加载下拉框数据
+				$.post('/area/query', {
+					"parentid": '-1'
+				}, function(data) {
+					var $html = "";
+					if(data != null) {
+						$html += '<option disabled="disabled" selected="selected">请选择省</option>';
+						$.each(data, function(index, item) {
+							$html += "<option value='" + item.areaid + "'>" + item.areaname + "</option>";
+						});
+						$("#province").append($html);
+						//append后必须从新渲染
+						form.render('select');
+					}
+
+				});
+				//监听省下拉框
+				form.on('select(province)', function(dataObj) {
+					//移除城市下拉框所有选项
+					$("#city").empty();
+					var cityHtml = '<option value="">请选择市</option>';
+					$("#city").html(cityHtml);
+					var areaHtml = '<option value="">请选择县/区</option>';
+					$("#district").html(areaHtml);
+					provinceText = $("#province").find("option:selected").text();
+					var parentid = $("#province").val();
+					//异步加载下拉框数据
+					$.post('/area/query', {
+						"parentid": parentid
+					}, function(data) {
+						var $html = "";
+						if(data != null) {
+							$.each(data, function(index, item) {
+								$html += "<option value='" + item.areaid + "'>" + item.areaname + "</option>";
+							});
+							$("#city").append($html);
+							//append后必须从新渲染
+							form.render('select');
+						}
+					});
+				});
+				//监听市下拉框
+				form.on('select(city)', function(dataObj) {
+					//移除县区下拉框所有选项
+					$("#distrct").empty();
+					var html = '<option value="">请选择县/区</option>';
+					$("#distrct").html(html);
+
+					cityText = $("#city").find("option:selected").text();
+					var parentid = $("#city").val();
+					//异步加载下拉框数据
+					$.post('/area/query', {
+						"parentid": parentid
+					}, function(data) {
+						var $html = "";
+						if(data != null) {
+							$.each(data, function(index, item) {
+								$html += "<option value='" + item.areaid + "'>" + item.areaname + "</option>";
+							});
+							$("#district").append($html);
+							//append后必须从新渲染
+							form.render('select');
+						}
+
+					});
+
+				});
+				//监听县区下拉框
+				form.on('select(district)', function(dataObj) {
+					areaText = $("#district").find("option:selected").text();
+				});
+				//验证select
+				form.verify({
+					required: function(value, item) {
+						var msg = "必填项不能为空";
+						value = $.trim(value);
+						var isEmpty = !value || value.length < 1;
+						// 当前验证元素是select且为空时,将页面定位至layui渲染的select处，或自定义想定位的位置
+						if(item.tagName == 'SELECT' && isEmpty) {
+							$("html").animate({
+								scrollTop: $(item).siblings(".layui-form-select").offset().top - 74
+							}, 50);
+						}
+						if(isEmpty) {
+							return msg;
+						}
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

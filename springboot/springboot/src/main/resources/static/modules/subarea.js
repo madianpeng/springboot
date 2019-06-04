@@ -15,28 +15,30 @@ layui.define(['table', 'form'], function(exports){
 
   //执行一个 table 实例
   table.render({
-    elem: '#LAY-region-manage'
+    elem: '#LAY-subarea-manage'
     ,limit: 10
     ,height: 'full-20'
     ,text: '对不起，加载出现异常！'
-    ,url: '/region/querylist' //数据接口
+    ,url: '/subarea/querylist' //数据接口
     ,title: '用户表'
     ,page: true //开启分页
     ,toolbar: '#toolbarDemo' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
     ,totalRow: true //开启合计行
     ,cols: [[ //表头
       {width: '5%',type: 'checkbox', fixed: 'left'}
-      ,{field: 'province', title: '省', width:'15%'}
-      ,{field: 'city', title: '市', width: '15%'}
-      ,{field: 'district', title: '区', width:'15%'}
-      ,{field: 'postcode', title: '邮政编码', width: '10%'}
-      ,{field: 'shortcode', title: '简码', width:'10%'} 
-      ,{field: 'citycode', title: '城市编码', width: '10%'}
-      ,{width: '20%', align:'center', toolbar: '#table-region-webuser'}
+      ,{field: 'province', title: '省', width:'10%'}
+      ,{field: 'city', title: '市', width: '10%'}
+      ,{field: 'district', title: '区', width:'10%'}
+      ,{field: 'addresskey', title: '关键字', width: '10%'}
+      ,{field: 'startnum', title: '起始号', width:'7%'} 
+      ,{field: 'endnum', title: '终止号', width: '7%'}
+      ,{field: 'single', title: '单双号', width: '7%'}
+      ,{field: 'position', title: '位置', width: '19%'}
+      ,{width: '20%', align:'center', toolbar: '#table-subarea-webuser'}
     ]]
   });
   //监听工具条
-  table.on('tool(LAY-region-manage)', function(obj){
+  table.on('tool(LAY-subarea-manage)', function(obj){
     var data = obj.data;
     if(obj.event === 'del'){
         layer.confirm('真的删除行么', function(index){
@@ -44,7 +46,7 @@ layui.define(['table', 'form'], function(exports){
 		  ids.push(obj.data.id);
           $.ajax({
         	  type: "post",
-        	  url: "/region/delregion",
+        	  url: "/subarea/delsubarea",
         	  data:	{
         		  ids:ids
         	  },
@@ -53,7 +55,7 @@ layui.define(['table', 'form'], function(exports){
 				layer.msg(res.msg);
 			}
           });
-          table.reload('LAY-region-manage'); //数据刷新
+          table.reload('LAY-subarea-manage'); //数据刷新
         });
      
     } else if(obj.event === 'edit'){
@@ -62,13 +64,13 @@ layui.define(['table', 'form'], function(exports){
       layer.open({
         type: 2
         ,title: '编辑取派员'
-        ,content: '/region/modifypage?id='+obj.data.id
+        ,content: '/subarea/modifypage?id='+obj.data.id
         ,maxmin: true
         ,area: ['500px', '450px']
         ,btn: ['确定', '取消']
         ,yes: function(index, layero){
           var iframeWindow = window['layui-layer-iframe'+ index]
-          ,submitID = 'LAY-region-front-submit'
+          ,submitID = 'LAY-subarea-front-submit'
           ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
           //监听提交
@@ -78,13 +80,13 @@ layui.define(['table', 'form'], function(exports){
             //$.ajax({});
             $.ajax({
             	   type: "POST",
-            	   url: "/region/modifyregion",
+            	   url: "/subarea/modifysubarea",
             	   data: field,
             	   success: function(res){
             	     layer.msg(res.msg);
             	   }
             	})
-            table.reload('LAY-region-manage'); //数据刷新
+            table.reload('LAY-subarea-manage'); //数据刷新
             layer.close(index); //关闭弹层
           });  
           
@@ -99,21 +101,21 @@ layui.define(['table', 'form'], function(exports){
 
   
   //监听头工具栏事件
-  table.on('toolbar(LAY-region-manage)', function(obj){
+  table.on('toolbar(LAY-subarea-manage)', function(obj){
     var checkStatus = table.checkStatus(obj.config.id)
     ,data = checkStatus.data; //获取选中的数据
     switch(obj.event){
       case 'add':
           layer.open({
               type: 2
-              ,title: '添加取派员'
-              ,content: '/regionform'
+              ,title: '添加分区'
+              ,content: '/subareaform'
               ,maxmin: true
-              ,area: ['600px', '450px']
+              ,area: ['700px', '550px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]
-                ,submitID = 'LAY-region-front-submit'
+                ,submitID = 'LAY-subarea-front-submit'
                 ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
                 //监听提交
@@ -124,14 +126,14 @@ layui.define(['table', 'form'], function(exports){
                   //$.ajax({});
                   $.ajax({
                 	   type: "POST",
-                	   url: "/region/addregion",
+                	   url: "/subarea/addsubarea",
                 	   data: field,
                 	   success: function(res){
                 	     layer.msg(res.msg);
                 	   }
                 	})
  
-                  table.reload('LAY-region-manage'); //数据刷新
+                  table.reload('LAY-subarea-manage'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
                 
@@ -149,13 +151,13 @@ layui.define(['table', 'form'], function(exports){
           layer.open({
               type: 2
               ,title: '编辑取派员'
-              ,content: '/region/modifypage?id='+checkStatus.data[0].id
+              ,content: '/subarea/modifypage?id='+checkStatus.data[0].id
               ,maxmin: true
               ,area: ['600px', '450px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]
-                ,submitID = 'LAY-region-front-submit'
+                ,submitID = 'LAY-subarea-front-submit'
                 ,submit = layero.find('iframe').contents().find('#'+ submitID);
 
                 //监听提交
@@ -166,13 +168,13 @@ layui.define(['table', 'form'], function(exports){
                   //$.ajax({});
                   $.ajax({
                	   type: "POST",
-               	   url: "/region/modifyregion",
+               	   url: "/subarea/modifysubarea",
                	   data: field,
                	   success: function(res){
                	     layer.msg(res.msg);
                	   }
                	})
-                  table.reload('LAY-region-manage'); //数据刷新
+                  table.reload('LAY-subarea-manage'); //数据刷新
                   layer.close(index); //关闭弹层
                 });  
                 
@@ -196,7 +198,7 @@ layui.define(['table', 'form'], function(exports){
               }
               $.ajax({
             	  type: "post",
-            	  url: "/region/delregion",
+            	  url: "/subarea/delsubarea",
             	  data:	{
             		  ids:ids
             	  },
@@ -205,12 +207,12 @@ layui.define(['table', 'form'], function(exports){
     				layer.msg(res.msg);
     			}
               });
-              table.reload('LAY-region-manage'); //数据刷新
+              table.reload('LAY-subarea-manage'); //数据刷新
           });
         }
       break;
     };
   });
   
-  exports('region', {})
+  exports('subarea', {})
 });
