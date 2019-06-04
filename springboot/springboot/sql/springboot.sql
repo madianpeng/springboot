@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2019-06-03 18:04:10
+Date: 2019-06-04 17:47:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3301,99 +3301,12 @@ CREATE TABLE `bc_decidedzone` (
   `id` varchar(50) NOT NULL,
   `name` varchar(30) DEFAULT NULL,
   `staff_id` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_decidedzone_staff` (`staff_id`),
-  CONSTRAINT `FK_decidedzone_staff` FOREIGN KEY (`staff_id`) REFERENCES `bc_staff` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bc_decidedzone
 -- ----------------------------
-
--- ----------------------------
--- Table structure for bc_region
--- ----------------------------
-DROP TABLE IF EXISTS `bc_region`;
-CREATE TABLE `bc_region` (
-  `id` varchar(50) NOT NULL,
-  `province` varchar(50) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `district` varchar(50) DEFAULT NULL,
-  `postcode` varchar(50) DEFAULT NULL,
-  `shortcode` varchar(30) DEFAULT NULL,
-  `citycode` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bc_region
--- ----------------------------
-INSERT INTO `bc_region` VALUES ('155955615264994', '792', '793', '310120', '310120', '792793310120', '793');
-INSERT INTO `bc_region` VALUES ('QY001', '北京市', '北京市', '东城区', '110101', 'BJSBJSDCQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY002', '北京市', '北京市', '西城区', '110102', 'BJSBJSXCQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY003', '北京市', '北京市', '朝阳区', '110105', 'BJSBJSCYQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY004', '北京市', '北京市', '丰台区', '110106', 'BJSBJSFTQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY005', '北京市', '北京市', '石景山区', '110107', 'BJSBJSSJSQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY006', '北京市', '北京市', '海淀区', '110108', 'BJSBJSHDQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY007', '北京市', '北京市', '门头沟区', '110109', 'BJSBJSMTGQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY008', '北京市', '北京市', '房山区', '110111', 'BJSBJSFSQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY009', '北京市', '北京市', '通州区', '110112', 'BJSBJSTZQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY010', '北京市', '北京市', '顺义区', '110113', 'BJSBJSSYQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY011', '北京市', '北京市', '昌平区', '110114', 'BJSBJSCPQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY012', '北京市', '北京市', '大兴区', '110115', 'BJSBJSDXQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY013', '北京市', '北京市', '怀柔区', '110116', 'BJSBJSHRQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY014', '北京市', '北京市', '平谷区', '110117', 'BJSBJSPGQ', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY015', '北京市', '北京市', '密云县', '110228', 'BJSBJSMYX', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY016', '北京市', '北京市', '延庆县', '110229', 'BJSBJSYQX', 'beijingshi');
-INSERT INTO `bc_region` VALUES ('QY017', '河北省', '石家庄市', '长安区', '130102', 'HBSSJZSZAQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY018', '河北省', '石家庄市', '桥东区', '130103', 'HBSSJZSQDQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY019', '河北省', '石家庄市', '桥西区', '130104', 'HBSSJZSQXQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY020', '河北省', '石家庄市', '新华区', '130105', 'HBSSJZSXHQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY021', '河北省', '石家庄市', '井陉矿区', '130107', 'HBSSJZSJXKQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY022', '河北省', '石家庄市', '裕华区', '130108', 'HBSSJZSYHQ', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY023', '河北省', '石家庄市', '井陉县', '130121', 'HBSSJZSJXX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY024', '河北省', '石家庄市', '正定县', '130123', 'HBSSJZSZDX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY025', '河北省', '石家庄市', '栾城县', '130124', 'HBSSJZSLCX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY026', '河北省', '石家庄市', '行唐县', '130125', 'HBSSJZSXTX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY027', '河北省', '石家庄市', '灵寿县', '130126', 'HBSSJZSLSX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY028', '河北省', '石家庄市', '高邑县', '130127', 'HBSSJZSGYX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY029', '河北省', '石家庄市', '深泽县', '130128', 'HBSSJZSSZX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY030', '河北省', '石家庄市', '赞皇县', '130129', 'HBSSJZSZHX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY031', '河北省', '石家庄市', '无极县', '130130', 'HBSSJZSWJX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY032', '河北省', '石家庄市', '平山县', '130131', 'HBSSJZSPSX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY033', '河北省', '石家庄市', '元氏县', '130132', 'HBSSJZSYSX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY034', '河北省', '石家庄市', '赵县', '130133', 'HBSSJZSZX', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY035', '河北省', '石家庄市', '辛集市', '130181', 'HBSSJZSXJS', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY036', '河北省', '石家庄市', '藁城市', '130182', 'HBSSJZSGCS', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY037', '河北省', '石家庄市', '晋州市', '130183', 'HBSSJZSJZS', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY038', '河北省', '石家庄市', '新乐市', '130184', 'HBSSJZSXLS', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY039', '河北省', '石家庄市', '鹿泉市', '130185', 'HBSSJZSLQS', 'shijiazhuangshi');
-INSERT INTO `bc_region` VALUES ('QY040', '天津市', '天津市', '和平区', '120101', 'TJSTJSHPQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY041', '天津市', '天津市', '河东区', '120102', 'TJSTJSHDQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY042', '天津市', '天津市', '河西区', '120103', 'TJSTJSHXQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY043', '天津市', '天津市', '南开区', '120104', 'TJSTJSNKQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY044', '天津市', '天津市', '河北区', '120105', 'TJSTJSHBQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY045', '天津市', '天津市', '红桥区', '120106', 'TJSTJSHQQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY046', '天津市', '天津市', '滨海新区', '120116', 'TJSTJSBHXQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY047', '天津市', '天津市', '东丽区', '120110', 'TJSTJSDLQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY048', '天津市', '天津市', '西青区', '120111', 'TJSTJSXQQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY049', '天津市', '天津市', '津南区', '120112', 'TJSTJSJNQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY050', '天津市', '天津市', '北辰区', '120113', 'TJSTJSBCQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY051', '天津市', '天津市', '武清区', '120114', 'TJSTJSWQQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY052', '天津市', '天津市', '宝坻区', '120115', 'TJSTJSBCQ', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY053', '天津市', '天津市', '宁河县', '120221', 'TJSTJSNHX', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY054', '天津市', '天津市', '静海县', '120223', 'TJSTJSJHX', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY055', '天津市', '天津市', '蓟县', '120225', 'TJSTJSJX', 'tianjinshi');
-INSERT INTO `bc_region` VALUES ('QY056', '山西省', '太原市', '小店区', '140105', 'SXSTYSXDQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY057', '山西省', '太原市', '迎泽区', '140106', 'SXSTYSYZQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY058', '山西省', '太原市', '杏花岭区', '140107', 'SXSTYSXHLQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY059', '山西省', '太原市', '尖草坪区', '140108', 'SXSTYSJCPQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY060', '山西省', '太原市', '万柏林区', '140109', 'SXSTYSWBLQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY061', '山西省', '太原市', '晋源区', '140110', 'SXSTYSJYQ', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY062', '山西省', '太原市', '清徐县', '140121', 'SXSTYSQXX', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY063', '山西省', '太原市', '阳曲县', '140122', 'SXSTYSYQX', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY064', '山西省', '太原市', '娄烦县', '140123', 'SXSTYSLFX', 'taiyuanshi');
-INSERT INTO `bc_region` VALUES ('QY065', '山西省', '太原市', '古交市', '140181', 'SXSTYSGJS', 'taiyuanshi');
 
 -- ----------------------------
 -- Table structure for bc_staff
@@ -3457,18 +3370,38 @@ CREATE TABLE `bc_subarea` (
   `addresskey` varchar(100) DEFAULT NULL,
   `startnum` varchar(30) DEFAULT NULL,
   `endnum` varchar(30) DEFAULT NULL,
-  `single` char(1) DEFAULT NULL,
+  `single` char(5) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_area_decidedzone` (`decidedzone_id`),
-  KEY `FK_area_region` (`region_id`),
-  CONSTRAINT `FK_area_decidedzone` FOREIGN KEY (`decidedzone_id`) REFERENCES `bc_decidedzone` (`id`),
-  CONSTRAINT `FK_area_region` FOREIGN KEY (`region_id`) REFERENCES `bc_region` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bc_subarea
 -- ----------------------------
+INSERT INTO `bc_subarea` VALUES ('1000000004', '', '6', '新加坡花园', '4', '103', '单号', '科学大道1-103');
+INSERT INTO `bc_subarea` VALUES ('1000000005', '', '7', '新加坡花园', '5', '104', '单号', '科学大道1-104');
+INSERT INTO `bc_subarea` VALUES ('1000000006', '', '8', '新加坡花园', '6', '105', '单号', '科学大道1-105');
+INSERT INTO `bc_subarea` VALUES ('1000000007', '', '9', '新加坡花园', '7', '106', '单号', '科学大道1-106');
+INSERT INTO `bc_subarea` VALUES ('1000000008', '', '10', '新加坡花园', '8', '107', '单号', '科学大道1-107');
+INSERT INTO `bc_subarea` VALUES ('1000000009', '', '11', '新加坡花园', '9', '108', '单号', '科学大道1-108');
+INSERT INTO `bc_subarea` VALUES ('1000000010', '', '12', '新加坡花园', '10', '109', '双号', '科学大道1-109');
+INSERT INTO `bc_subarea` VALUES ('1000000011', '', '13', '新加坡花园', '11', '110', '单号', '科学大道1-110');
+INSERT INTO `bc_subarea` VALUES ('1000000012', '', '14', '新加坡花园', '12', '111', '单号', '科学大道1-111');
+INSERT INTO `bc_subarea` VALUES ('1000000013', '', '15', '新加坡花园', '13', '112', '单号', '科学大道1-112');
+INSERT INTO `bc_subarea` VALUES ('1000000014', '', '16', '新加坡花园', '14', '113', '单号', '科学大道1-113');
+INSERT INTO `bc_subarea` VALUES ('1000000015', '', '17', '新加坡花园', '15', '114', '单号', '科学大道1-114');
+INSERT INTO `bc_subarea` VALUES ('1000000016', '', '18', '新加坡花园', '16', '115', '单号', '科学大道1-115');
+INSERT INTO `bc_subarea` VALUES ('1000000017', '', '18', '新加坡花园', '16', '116', '单号', '科学大道1-116');
+INSERT INTO `bc_subarea` VALUES ('1000000018', '', '18', '新加坡花园', '16', '117', '单号', '科学大道1-117');
+INSERT INTO `bc_subarea` VALUES ('1000000019', '', '21', '新加坡花园', '19', '118', '单号', '科学大道1-118');
+INSERT INTO `bc_subarea` VALUES ('1000000020', '', '22', '新加坡花园', '20', '119', '单号', '科学大道1-119');
+INSERT INTO `bc_subarea` VALUES ('1000000021', '', '23', '新加坡花园', '21', '120', '单号', '科学大道1-120');
+INSERT INTO `bc_subarea` VALUES ('1000000022', '', '24', '新加坡花园', '22', '121', '单号', '科学大道1-121');
+INSERT INTO `bc_subarea` VALUES ('1000000023', '', '25', '新加坡花园', '23', '122', '单号', '科学大道1-122');
+INSERT INTO `bc_subarea` VALUES ('1000000024', '', '26', '新加坡花园', '24', '123', '单号', '科学大道1-123');
+INSERT INTO `bc_subarea` VALUES ('1000000025', '', '27', '新加坡花园', '25', '124', '单号', '科学大道1-124');
+INSERT INTO `bc_subarea` VALUES ('155961839128996', null, '3', '花园小区', '1', '200', '双号', '双港大道1-200');
+INSERT INTO `bc_subarea` VALUES ('155961861270292', null, '3', '新加坡花园', '1', '100', '单号', '科学大道1-100');
 
 -- ----------------------------
 -- Table structure for tb_user
