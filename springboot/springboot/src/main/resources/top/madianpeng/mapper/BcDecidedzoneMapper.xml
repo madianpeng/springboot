@@ -178,4 +178,30 @@
       staff_id = #{staffId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="queryDecidedzone" parameterType="BcDecidedzone" resultType="BcDecidedzone">
+  	SELECT
+		a.id,
+		a. NAME,
+		b. NAME staffname,
+		b.telephone,
+		b.station
+	FROM
+		bc_decidedzone a
+	LEFT JOIN 
+		bc_staff b 
+	ON 
+		a.staff_id = b.id
+	<where>
+		<if test="name !=null and name !=''">
+		  and a.name like #{name} 
+		</if>
+		<if test="staffname !=null and staffname !=''">
+		  and b.name like #{staffname} 
+		</if>
+		<if test="station !=null and station !=''">
+		  and b.station like #{station} 
+		</if>
+	</where>
+  </select>
 </mapper>

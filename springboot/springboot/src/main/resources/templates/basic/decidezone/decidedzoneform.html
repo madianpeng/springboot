@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>添加定区</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+</head>
+<body>
+
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">定区名称</label>
+      <div class="layui-input-inline">
+        <input type="text" name="name" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">取派员</label>
+        <div class="layui-input-inline">
+           <select name="staffID" id="staff" lay-verify="required" lay-filter="staff" autocomplete="off">
+           </select>
+       </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">选择分区</label>
+        <div class="layui-input-inline">
+			<div id="test12" class="demo-tree-more"></div>
+       </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-decidezone-front-submit" id="LAY-decidezone-front-submit" value="确认">
+    </div>
+  </div>
+
+   <script th:src="@{/layui/layui.js}"></script> 
+  <script>
+  layui.config({
+    base: '/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'tree'], function(){
+    var $ = layui.$
+    ,form = layui.form
+    ,tree = layui.tree ;
+    
+    //验证select
+    form.verify({
+        required:function (value,item) {
+            var msg="必填项不能为空";
+            value= $.trim(value);
+            var isEmpty=!value || value.length<1;
+           // 当前验证元素是select且为空时,将页面定位至layui渲染的select处，或自定义想定位的位置
+            if(item.tagName=='SELECT' && isEmpty){
+                $("html").animate({
+                    scrollTop:$(item).siblings(".layui-form-select").offset().top-74
+                },50);
+            }
+            if(isEmpty){
+                return msg;
+            }
+        }
+	})
+	var data = [{
+	    label: '一级1'
+	        ,id: 1
+	        ,children: [{
+	          label: '二级1-1 可允许跳转'
+	          ,id: 3
+	          ,href: 'https://www.layui.com/'
+	          ,children: [{
+	            label: '三级1-1-3'
+	            ,id: 23
+	            ,children: [{
+	              label: '四级1-1-3-1'
+	              ,id: 24
+	              ,children: [{
+	                label: '五级1-1-3-1-1'
+	                ,id: 30
+	              },{
+	                label: '五级1-1-3-1-2'
+	                ,id: 31
+	              }]
+	            }]
+	          },{
+	            label: '三级1-1-1'
+	            ,id: 7
+	            ,children: [{
+	              label: '四级1-1-1-1 可允许跳转'
+	              ,id: 15
+	              ,href: 'https://www.layui.com/doc/'
+	            }]
+	          },{
+	            label: '三级1-1-2'
+	            ,id: 8
+	            ,children: [{
+	              label: '四级1-1-2-1'
+	              ,id: 32
+	            }]
+	          }]
+	        },{
+	          label: '二级1-2'
+	          ,id: 4
+	          ,children: [{
+	            label: '三级1-2-1'
+	            ,id: 9
+	            ,disabled: true
+	          },{
+	            label: '三级1-2-2'
+	            ,id: 10
+	          }]
+	        },{
+	          label: '二级1-3'
+	          ,id: 20
+	          ,children: [{
+	            label: '三级1-3-1'
+	            ,id: 21
+	          },{
+	            label: '三级1-3-2'
+	            ,id: 22
+	          }]
+	        }]
+	      },{
+	        label: '一级2'
+	        ,id: 2
+	        ,children: [{
+	          label: '二级2-1'
+	          ,id: 5
+	          ,children: [{
+	            label: '三级2-1-1'
+	            ,id: 11
+	          },{
+	            label: '三级2-1-2'
+	            ,id: 12
+	          }]
+	        },{
+	          label: '二级2-2'
+	          ,id: 6
+	          ,children: [{
+	            label: '三级2-2-1'
+	            ,id: 13
+	          },{
+	            label: '三级2-2-2'
+	            ,id: 14
+	            ,disabled: true
+	          }]
+	        }]
+	      },{
+	        label: '一级3'
+	        ,id: 16
+	        ,children: [{
+	          label: '二级3-1'
+	          ,id: 17
+	          ,fixed: true
+	          ,children: [{
+	            label: '三级3-1-1'
+	            ,id: 18
+	          },{
+	            label: '三级3-1-2'
+	            ,id: 19
+	          }]
+	        },{
+	          label: '二级3-2'
+	          ,id: 27
+	          ,children: [{
+	            label: '三级3-2-1'
+	            ,id: 28
+	          },{
+	            label: '三级3-2-2'
+	            ,id: 29
+	          }]
+	        }]
+	      }];
+	  //基本演示
+	  tree.render({
+	    elem: '#test12'
+	    ,data: data
+	    ,showCheckbox: true  //是否显示复选框
+	    ,key: 'id'  //定义索引名称
+	    ,checked: [1, 11, 12]  //选中节点(依赖于 showCheckbox 以及 key 参数)。
+	  });
+  })
+  </script>
+</body>
+</html>

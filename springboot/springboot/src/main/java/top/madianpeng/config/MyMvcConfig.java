@@ -18,7 +18,9 @@ public class MyMvcConfig extends WebMvcConfigurationSupport {
 		registry.addViewController("/console").setViewName("home/homepage2");
 		registry.addViewController("/staff").setViewName("basic/staff/staff");
 		registry.addViewController("/subarea").setViewName("basic/subarea/subarea");
+		registry.addViewController("/decidezone").setViewName("basic/decidezone/decidedzone");
 		registry.addViewController("/subareaform").setViewName("basic/subarea/subareaform");
+		registry.addViewController("/decidezoneform").setViewName("basic/decidezone/decidedzoneform");
 		registry.addViewController("/staffform").setViewName("basic/staff/staffform");
 		registry.addViewController("/userlist").setViewName("user/user/list");
 	}

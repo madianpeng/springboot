@@ -1,11 +1,22 @@
 package top.madianpeng.pojo;
 
-public class BcDecidedzone {
-    private String id;
+public class BcDecidedzone extends Pageweb {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String name;
 
     private String staffId;
+    
+    private String staffname;
+    
+    private String telephone;
+    
+    private String station;
 
     public String getId() {
         return id;
@@ -30,4 +41,30 @@ public class BcDecidedzone {
     public void setStaffId(String staffId) {
         this.staffId = staffId == null ? null : staffId.trim();
     }
+
+	public String getStaffname() {
+		return staffname;
+	}
+
+	public void setStaffname(String staffname) {
+		this.staffname = staffname;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getStation() {
+		return station;
+	}
+
+	public void setStation(String station) {
+		this.station = station;
+	}
+    
+    
 }

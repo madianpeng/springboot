@@ -273,10 +273,13 @@
   			and a.id = #{id}
   		</if>
   		<if test="province !=null and province !=''" >
-  			and a.province like #{province}
+  			and d.areaname like #{province}
   		</if>
   		<if test="city !=null and city !=''" >
-  			and a.city like #{city}
+  			and c.areaname like #{city}
+  		</if>
+  		<if test="district !=null and district !=''" >
+  			and b.areaname like #{district}
   		</if>
   		<if test="single !=null and single !=''" >
   			and a.single = #{single}
@@ -286,6 +289,9 @@
   		</if>
   		<if test="position !=null and position !=''" >
   			and a.position like #{position}
+  		</if>
+  		<if test="decidedzoneId !=null and decidedzoneId !=''" >
+  			and a.decidedzone_id = #{decidedzoneId}
   		</if>
 	</where>
   	

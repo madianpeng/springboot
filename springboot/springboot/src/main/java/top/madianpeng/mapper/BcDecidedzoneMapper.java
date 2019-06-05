@@ -27,4 +27,6 @@ public interface BcDecidedzoneMapper {
     int updateByPrimaryKeySelective(BcDecidedzone record);
 
     int updateByPrimaryKey(BcDecidedzone record);
+
+	List<BcDecidedzone> queryDecidedzone(BcDecidedzone decidedzone);
 }

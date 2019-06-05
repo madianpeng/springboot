@@ -28,6 +28,21 @@ public class SubareaServiceImpl implements SubareaService {
 
 	@Override
 	public PageBean<BcSubarea> querySubarea(BcSubarea subarea) {
+		if (NonUtil.isNotNon(subarea.getProvince())) {
+			subarea.setProvince("%" + subarea.getProvince() + "%");
+		}
+		if (NonUtil.isNotNon(subarea.getCity())) {
+			subarea.setCity("%" + subarea.getCity() + "%");
+		}
+		if (NonUtil.isNotNon(subarea.getDistrict())) {
+			subarea.setDistrict("%" + subarea.getDistrict() + "%");
+		}
+		if (NonUtil.isNotNon(subarea.getAddresskey())) {
+			subarea.setAddresskey("%" + subarea.getAddresskey() + "%");
+		}
+		if (NonUtil.isNotNon(subarea.getPosition())) {
+			subarea.setPosition("%" + subarea.getPosition() + "%");
+		}
 		PageBean<BcSubarea> pageBean = new PageBean<BcSubarea>();
 		List<BcSubarea> list = new ArrayList<BcSubarea>();
 		List<BcSubarea> countlist = new ArrayList<BcSubarea>();
@@ -92,7 +107,7 @@ public class SubareaServiceImpl implements SubareaService {
 		try {
 			mapper.delSubarea(id);
 		} catch (Exception e) {
-			logger.error("删除失败："+e.toString());
+			logger.error("删除失败：" + e.toString());
 			returnValue.isFail("删除");
 			return returnValue;
 		}
