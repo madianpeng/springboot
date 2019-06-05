@@ -2,6 +2,7 @@ package top.madianpeng.service;
 
 import java.util.List;
 
+import top.madianpeng.pojo.Area;
 import top.madianpeng.pojo.BcSubarea;
 import top.madianpeng.pojo.PageBean;
 import top.madianpeng.pojo.ReturnValue;
@@ -39,5 +40,5 @@ public interface SubareaService {
 	 * @return
 	 */
 	ReturnValue delSubarea(List<String> id);
-
+	List<Area> queryCity();
 }

@@ -307,4 +307,32 @@
   		</foreach>
   	</where>
   </delete>
+  
+  
+  <!-- 同表级联查询 (支持多层嵌套) -->
+  <resultMap type="Area" id="areas">
+    <id column="areaid" jdbcType="VARCHAR" property="id" />
+    <result column="areaname" jdbcType="VARCHAR" property="lable" />
+    <result column="parentid" jdbcType="VARCHAR" property="parentid" />
+    <collection property="children"  ofType="Area" column="parentid" 
+        select="queryCityByParentId">
+        <id column="areaid" jdbcType="VARCHAR" property="id" />
+        <result column="areaname" jdbcType="VARCHAR" property="lable" />
+    	<result column="parentid" jdbcType="VARCHAR" property="parentid" />
+    </collection>
+  </resultMap>
+
+  <!--因为是一对多的关系，用collection-->
+  <select id="queryCityByParentId" parameterType="java.lang.Integer" resultMap="areas">
+    select
+    	a.areaid, a.areaname, a.parentid 
+    from bc_area a where a.parentid = #{parentid}
+  </select>
+  
+  <!--因为是一对多的关系，用collection-->
+  <select id="queryCity" resultMap="areas">
+    select
+    	a.areaid, a.areaname, a.parentid  
+    from bc_area a where a.parentid ='-1' 
+  </select>
 </mapper>

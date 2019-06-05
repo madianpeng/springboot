@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 
 import top.madianpeng.mapper.BcSubareaMapper;
+import top.madianpeng.pojo.Area;
 import top.madianpeng.pojo.BcSubarea;
 import top.madianpeng.pojo.PageBean;
 import top.madianpeng.pojo.ReturnValue;
@@ -113,6 +114,12 @@ public class SubareaServiceImpl implements SubareaService {
 		}
 		returnValue.isSuccess("删除");
 		return returnValue;
+	}
+
+	@Override
+	public List<Area> queryCity() {
+		List<Area> queryCity = mapper.queryCity();
+		return queryCity;
 	}
 
 }

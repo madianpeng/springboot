@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
+import top.madianpeng.pojo.Area;
 import top.madianpeng.pojo.BcRegion;
 import top.madianpeng.pojo.BcSubarea;
 import top.madianpeng.pojo.PageBean;
@@ -94,5 +95,11 @@ public class SubareaController {
 		List<String> id = Arrays.asList(ids);
 		ReturnValue returnValue = subareaService.delSubarea(id);
 		return returnValue;
+	}
+	@RequestMapping("/delsubarea")
+	@ResponseBody
+	public List<Area> queryCity() {
+		List<Area> queryCity = subareaService.queryCity();
+		return queryCity;
 	}
 }

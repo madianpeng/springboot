@@ -2,6 +2,8 @@ package top.madianpeng.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import top.madianpeng.pojo.Area;
 import top.madianpeng.pojo.BcSubarea;
 import top.madianpeng.pojo.BcSubareaExample;
 
@@ -32,4 +34,5 @@ public interface BcSubareaMapper {
 
 	int delSubarea(List<String> id);
 	
+	List<Area> queryCity();
 }	
