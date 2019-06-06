@@ -13,16 +13,23 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import top.madianpeng.mapper.BcDecidedzoneMapper;
+import top.madianpeng.mapper.BcSubareaMapper;
 import top.madianpeng.pojo.BcDecidedzone;
+import top.madianpeng.pojo.BcSubarea;
 import top.madianpeng.pojo.PageBean;
+import top.madianpeng.pojo.ReturnValue;
 import top.madianpeng.service.DecideZoneService;
+import top.madianpeng.utils.IDUtils;
 import top.madianpeng.utils.NonUtil;
 @Service
 @Transactional
 public class DecideZoneServiceImpl implements DecideZoneService {
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private BcDecidedzoneMapper mapper;	
+	@Autowired
+	private BcSubareaMapper subareaMapper;	
 	@Override
 	public PageBean<BcDecidedzone> queryDecidedzone(BcDecidedzone decidedzone) {
 		if (NonUtil.isNotNon(decidedzone.getName())) {
@@ -48,6 +55,28 @@ public class DecideZoneServiceImpl implements DecideZoneService {
 		pageBean.setCount(count);
 		pageBean.setData(list);
 		return pageBean;
+	}
+	@Override
+	public ReturnValue addDecidedzone(BcDecidedzone decidedzone) {
+		ReturnValue returnValue = new ReturnValue();
+		String id = IDUtils.getId();
+		decidedzone.setId(id);
+		String[] split = decidedzone.getSubareaid().split(",");
+		List<BcSubarea>  list = new ArrayList<BcSubarea>();
+		for (String subareaid : split) {
+			BcSubarea bcSubarea = new BcSubarea();
+			bcSubarea.setId(subareaid);
+			bcSubarea.setDecidedzoneId(id);
+			list.add(bcSubarea);
+		}
+		try {
+			mapper.insert(decidedzone);
+			subareaMapper.bindDecidezone(list);
+		} catch (Exception e) {
+			logger.error("新增异常："+e.getMessage());
+		}
+		returnValue.isSuccess("新增");
+		return returnValue;
 	}
 
 }

@@ -96,10 +96,20 @@ public class SubareaController {
 		ReturnValue returnValue = subareaService.delSubarea(id);
 		return returnValue;
 	}
-	@RequestMapping("/delsubarea")
+	/**
+	 * 省市区树形结构查询
+	 * @return
+	 */
+	@RequestMapping("/querycity")
 	@ResponseBody
 	public List<Area> queryCity() {
 		List<Area> queryCity = subareaService.queryCity();
 		return queryCity;
+	}
+	@RequestMapping("/queryfordecide")
+	@ResponseBody
+	public List<BcSubarea> queryForDecide() {
+		List<BcSubarea> list = subareaService.queryForDecide();
+		return list;
 	}
 }

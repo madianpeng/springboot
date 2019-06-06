@@ -40,4 +40,10 @@ public interface StaffService {
 	 * @return
 	 */
 	ReturnValue delStaff(List<String> idsList);
+	
+	/**
+	 * 为定区查询取派员
+	 * @return
+	 */
+	List<BcStaff> queryForDecide();
 }

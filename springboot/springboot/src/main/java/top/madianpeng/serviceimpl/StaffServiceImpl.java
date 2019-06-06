@@ -105,4 +105,15 @@ public class StaffServiceImpl implements StaffService {
 		return returnValue;
 	}
 
+	@Override
+	public List<BcStaff> queryForDecide() {
+		List<BcStaff> list  = new ArrayList<BcStaff>();
+		try {
+			list = mapper.queryStaff(null);
+		} catch (Exception e) {
+			logger.error("查询异常："+e.getMessage());
+		}
+		return list;
+	}
+
 }

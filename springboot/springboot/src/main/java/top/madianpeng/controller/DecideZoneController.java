@@ -56,4 +56,15 @@ public class DecideZoneController {
 		model.addAttribute("decidezoneid", id);
 		return "/basic/decidezone/subarea";
 	}
+	
+	/**
+	 * 添加分区
+	 * @return
+	 */
+	@RequestMapping("/adddecidezone")
+	@ResponseBody
+	public ReturnValue addDecidezone(BcDecidedzone decidedzone) {
+		ReturnValue ReturnValue =decideZoneService.addDecidedzone(decidedzone);
+		return ReturnValue;
+	}
 }

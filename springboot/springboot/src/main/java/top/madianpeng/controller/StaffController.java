@@ -88,5 +88,16 @@ public class StaffController {
 		List<String> idsList = Arrays.asList(ids);
 		ReturnValue returnValue = staffService.delStaff(idsList);
 		return returnValue;
-	}	
+	}
+	
+	/**
+	 * 为定区查询取派员
+	 * @return
+	 */
+	@RequestMapping("/queryfordecide")
+	@ResponseBody
+	public List<BcStaff> queryForDecide(){
+		List<BcStaff> list = staffService.queryForDecide();
+		return list;
+	}
 }

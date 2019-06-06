@@ -8,7 +8,7 @@
  */
 
 
-layui.define(['table', 'form'], function(exports){
+layui.define(['table','form'], function(exports){
   var $ = layui.$
   ,table = layui.table
   ,form = layui.form;
@@ -117,10 +117,10 @@ layui.define(['table', 'form'], function(exports){
       case 'add':
           layer.open({
               type: 2
-              ,title: '添加取派员'
+              ,title: '添加定区'
               ,content: '/decidezoneform'
               ,maxmin: true
-              ,area: ['600px', '450px']
+              ,area: ['850px', '600px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]
@@ -130,7 +130,6 @@ layui.define(['table', 'form'], function(exports){
                 //监听提交
                 iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
                   var field = data.field; //获取提交的字段
-                  
                   //提交 Ajax 成功后，静态更新表格中的数据
                   //$.ajax({});
                   $.ajax({

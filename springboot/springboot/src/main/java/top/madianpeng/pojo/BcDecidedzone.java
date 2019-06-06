@@ -17,6 +17,8 @@ public class BcDecidedzone extends Pageweb {
     private String telephone;
     
     private String station;
+    
+    private String subareaid;
 
     public String getId() {
         return id;
@@ -65,6 +67,15 @@ public class BcDecidedzone extends Pageweb {
 	public void setStation(String station) {
 		this.station = station;
 	}
+
+	public String getSubareaid() {
+		return subareaid;
+	}
+
+	public void setSubareaid(String subareaid) {
+		this.subareaid = subareaid;
+	}
     
+	
     
 }

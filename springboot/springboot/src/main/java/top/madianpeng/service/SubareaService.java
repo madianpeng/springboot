@@ -40,5 +40,14 @@ public interface SubareaService {
 	 * @return
 	 */
 	ReturnValue delSubarea(List<String> id);
+	/**
+	 * 省市区树形结构查询
+	 * @return
+	 */
 	List<Area> queryCity();
+	/**
+	 * 为定区查询
+	 * @return
+	 */
+	List<BcSubarea> queryForDecide();
 }

@@ -312,27 +312,39 @@
   <!-- 同表级联查询 (支持多层嵌套) -->
   <resultMap type="Area" id="areas">
     <id column="areaid" jdbcType="VARCHAR" property="id" />
-    <result column="areaname" jdbcType="VARCHAR" property="lable" />
+    <result column="areaname" jdbcType="VARCHAR" property="label" />
     <result column="parentid" jdbcType="VARCHAR" property="parentid" />
-    <collection property="children"  ofType="Area" column="parentid" 
+    <collection property="children"  ofType="Area" column="areaid" 
         select="queryCityByParentId">
         <id column="areaid" jdbcType="VARCHAR" property="id" />
-        <result column="areaname" jdbcType="VARCHAR" property="lable" />
+        <result column="areaname" jdbcType="VARCHAR" property="label" />
     	<result column="parentid" jdbcType="VARCHAR" property="parentid" />
     </collection>
   </resultMap>
 
   <!--因为是一对多的关系，用collection-->
-  <select id="queryCityByParentId" parameterType="java.lang.Integer" resultMap="areas">
+  <select id="queryCityByParentId" parameterType="java.lang.String" resultMap="areas">
     select
     	a.areaid, a.areaname, a.parentid 
-    from bc_area a where a.parentid = #{parentid}
+    from bc_area a where a.parentid = #{areaid}
   </select>
   
   <!--因为是一对多的关系，用collection-->
   <select id="queryCity" resultMap="areas">
     select
     	a.areaid, a.areaname, a.parentid  
-    from bc_area a where a.parentid ='-1' 
+    from bc_area a where a.parentid ='-1'
   </select>
+  
+  <update id="bindDecidezone" parameterType="java.util.List">
+  	<foreach collection="list" item="item" separator=";">
+  		update bc_subarea
+  		<set>
+  			decidedzone_id=#{item.decidedzoneId,jdbcType=VARCHAR}
+  		</set>
+  		<where>
+  		 	id = #{item.id,jdbcType=VARCHAR}
+  		</where>
+  	</foreach>
+  </update>
 </mapper>

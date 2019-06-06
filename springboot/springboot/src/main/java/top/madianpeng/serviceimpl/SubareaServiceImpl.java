@@ -65,6 +65,7 @@ public class SubareaServiceImpl implements SubareaService {
 	public ReturnValue addSubarea(BcSubarea subarea) {
 		ReturnValue returnValue = new ReturnValue();
 		subarea.setId(IDUtils.getId());
+		subarea.setDecidedzoneId("0");
 		try {
 			mapper.insert(subarea);
 		} catch (Exception e) {
@@ -120,6 +121,18 @@ public class SubareaServiceImpl implements SubareaService {
 	public List<Area> queryCity() {
 		List<Area> queryCity = mapper.queryCity();
 		return queryCity;
+	}
+
+	@Override
+	public List<BcSubarea> queryForDecide() {
+		BcSubarea subarea = new BcSubarea();
+		subarea.setDecidedzoneId("0");
+		List<BcSubarea> querySubarea = mapper.querySubarea(subarea);
+		for (BcSubarea bcSubarea : querySubarea) {
+			bcSubarea.setAddresskey(bcSubarea.getProvince() + " " + bcSubarea.getCity() + " " + bcSubarea.getDistrict()
+					+ " " + bcSubarea.getAddresskey());
+		}
+		return querySubarea;
 	}
 
 }

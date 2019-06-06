@@ -35,4 +35,7 @@ public interface BcSubareaMapper {
 	int delSubarea(List<String> id);
 	
 	List<Area> queryCity();
+
+	int bindDecidezone(List<BcSubarea> list);
+
 }	
