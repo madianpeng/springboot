@@ -63,7 +63,7 @@ layui.define(['table','form'], function(exports){
         ,title: '编辑取派员'
         ,content: '/decidezone/modifypage?id='+obj.data.id
         ,maxmin: true
-        ,area: ['500px', '450px']
+        ,area: ['850px', '600px']
         ,btn: ['确定', '取消']
         ,yes: function(index, layero){
           var iframeWindow = window['layui-layer-iframe'+ index]
@@ -161,7 +161,7 @@ layui.define(['table','form'], function(exports){
               ,title: '编辑取派员'
               ,content: '/decidezone/modifypage?id='+checkStatus.data[0].id
               ,maxmin: true
-              ,area: ['600px', '450px']
+              ,area: ['850px', '600px']
               ,btn: ['确定', '取消']
               ,yes: function(index, layero){
                 var iframeWindow = window['layui-layer-iframe'+ index]

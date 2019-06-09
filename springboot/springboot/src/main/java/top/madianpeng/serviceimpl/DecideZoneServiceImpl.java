@@ -74,9 +74,15 @@ public class DecideZoneServiceImpl implements DecideZoneService {
 			subareaMapper.bindDecidezone(list);
 		} catch (Exception e) {
 			logger.error("新增异常："+e.getMessage());
+			throw new RuntimeException(e.getMessage());		
 		}
 		returnValue.isSuccess("新增");
 		return returnValue;
+	}
+	@Override
+	public BcDecidedzone findById(String id) {
+		BcDecidedzone decidedzone = mapper.selectByPrimaryKey(id);
+		return decidedzone;
 	}
 
 }

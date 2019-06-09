@@ -17,5 +17,11 @@ public interface DecideZoneService {
 	 * @return
 	 */
 	ReturnValue addDecidedzone(BcDecidedzone decidedzone);
+	/**
+	 * 根据ID查找
+	 * @param id
+	 * @return
+	 */
+	BcDecidedzone findById(String id);
 
 }

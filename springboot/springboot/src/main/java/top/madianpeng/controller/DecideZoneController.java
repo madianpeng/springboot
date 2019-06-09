@@ -67,4 +67,17 @@ public class DecideZoneController {
 		ReturnValue ReturnValue =decideZoneService.addDecidedzone(decidedzone);
 		return ReturnValue;
 	}
+	
+	/**
+	 * 去修改页面
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/modifypage")
+	public String modifyPage(String id,Model model) {
+		BcDecidedzone decidedzone = decideZoneService.findById(id);
+		model.addAttribute("decidedzone", decidedzone);
+		return "/basic/decidezone/modifyform";
+		
+	}
 }
