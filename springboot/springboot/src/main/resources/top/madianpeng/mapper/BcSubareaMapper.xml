@@ -296,6 +296,23 @@
 	</where>
   	
   </select>
+  
+  <select id="querySubarea4Decided" parameterType="BcSubarea" resultType="BcSubarea">
+  	SELECT
+	a.*  , b.areaname district,c.areaname city,d.areaname province
+	FROM
+	bc_subarea a
+	LEFT JOIN bc_area b ON a.region_id = b.areaid
+	LEFT JOIN bc_area c ON b.parentid = c.areaid
+	LEFT JOIN bc_area d ON c.parentid = d.areaid
+	<where>
+		and a.decidedzone_id='0'
+  		<if test="decidedzoneId !=null and decidedzoneId !=''" >
+  			or a.decidedzone_id = #{decidedzoneId}
+  		</if>
+	</where>
+  	
+  </select>
   <select id="queryCount" resultType="Integer">
   	select count(0) from bc_subarea
   </select>

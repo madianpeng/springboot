@@ -49,5 +49,5 @@ public interface SubareaService {
 	 * 为定区查询
 	 * @return
 	 */
-	List<BcSubarea> queryForDecide();
+	List<BcSubarea> queryForDecide(String id);
 }

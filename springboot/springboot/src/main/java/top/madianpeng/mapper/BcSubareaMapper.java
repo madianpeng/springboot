@@ -38,4 +38,6 @@ public interface BcSubareaMapper {
 
 	int bindDecidezone(List<BcSubarea> list);
 
+	List<BcSubarea> querySubarea4Decided(BcSubarea subarea);
+
 }	

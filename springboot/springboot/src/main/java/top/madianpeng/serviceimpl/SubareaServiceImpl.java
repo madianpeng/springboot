@@ -124,10 +124,12 @@ public class SubareaServiceImpl implements SubareaService {
 	}
 
 	@Override
-	public List<BcSubarea> queryForDecide() {
+	public List<BcSubarea> queryForDecide(String id) {
 		BcSubarea subarea = new BcSubarea();
-		subarea.setDecidedzoneId("0");
-		List<BcSubarea> querySubarea = mapper.querySubarea(subarea);
+		if (NonUtil.isNotNon(id)) {
+			subarea.setDecidedzoneId(id);
+		}
+		List<BcSubarea> querySubarea = mapper.querySubarea4Decided(subarea);
 		for (BcSubarea bcSubarea : querySubarea) {
 			bcSubarea.setAddresskey(bcSubarea.getProvince() + " " + bcSubarea.getCity() + " " + bcSubarea.getDistrict()
 					+ " " + bcSubarea.getAddresskey());

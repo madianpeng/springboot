@@ -23,5 +23,11 @@ public interface DecideZoneService {
 	 * @return
 	 */
 	BcDecidedzone findById(String id);
+	/**
+	 * 查询关联分区id
+	 * @param id
+	 * @return
+	 */
+	String[] findSubarea(String id);
 
 }

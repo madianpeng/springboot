@@ -106,10 +106,14 @@ public class SubareaController {
 		List<Area> queryCity = subareaService.queryCity();
 		return queryCity;
 	}
+	/**
+	 * 为定区查询
+	 * @return
+	 */
 	@RequestMapping("/queryfordecide")
 	@ResponseBody
-	public List<BcSubarea> queryForDecide() {
-		List<BcSubarea> list = subareaService.queryForDecide();
+	public List<BcSubarea> queryForDecide(String id) {
+		List<BcSubarea> list = subareaService.queryForDecide(id);
 		return list;
 	}
 }

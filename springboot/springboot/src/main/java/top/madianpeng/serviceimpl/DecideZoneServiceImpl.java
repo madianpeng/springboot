@@ -84,5 +84,16 @@ public class DecideZoneServiceImpl implements DecideZoneService {
 		BcDecidedzone decidedzone = mapper.selectByPrimaryKey(id);
 		return decidedzone;
 	}
+	@Override
+	public String[] findSubarea(String id) {
+		BcSubarea subarea = new BcSubarea();
+		subarea.setDecidedzoneId(id);
+		List<BcSubarea> list = subareaMapper.querySubarea(subarea);
+		String[] ids = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			ids[i]=list.get(i).getId();
+		}
+		return ids;
+	}
 
 }

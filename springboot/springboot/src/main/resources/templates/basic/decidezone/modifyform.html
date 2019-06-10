@@ -38,7 +38,7 @@
 		</div>
 
 		<script th:src="@{/layui/layui.js}"></script>
-		<script>
+		<script th:inline="javascript">
 			layui.config({
 				base: '/' //静态资源所在路径
 			}).extend({
@@ -47,13 +47,21 @@
 				var $ = layui.$,
 					form = layui.form,
 					transfer = layui.transfer;
+				var staffid=[[${decidedzone.staffId}]];
+				var id=[[${decidedzone.id}]];
+				var subareaid=[[${subareaid}]];
+				console.log(subareaid);
 				//异步加载下拉框数据
 				$.post('/staff/queryfordecide', {}, function(data) {
 					var $html = "";
 					if(data != null) {
-						$html += '<option disabled="disabled" selected="selected">请选择</option>';
+						$html += '<option disabled="disabled">请选择</option>';
 						$.each(data, function(index, item) {
-							$html += "<option value='" + item.id + "'>" + item.name + "</option>";
+							if(staffid==item.id){
+								$html += "<option selected='selected' value='" + item.id + "'>" + item.name + "</option>";
+							}else{
+								$html += "<option value='" + item.id + "'>" + item.name + "</option>";
+							}
 						});
 						$("#staff").append($html);
 						//append后必须从新渲染
@@ -62,7 +70,7 @@
 
 				});
 				$.ajax({
-					url: '/subarea/queryfordecide',
+					url: '/subarea/queryfordecide?id='+id,
 					dataType: "json",
 					success: function(data) {
 						//显示搜索框
@@ -76,10 +84,11 @@
 								}
 							},
 							data: data,
+							value: subareaid,
 							title: ['未选择', '已选择'],
 							width: 300,
 							showSearch: true,
-							id: 'key'
+							id: 'key',
 						})
 					}
 				})

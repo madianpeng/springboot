@@ -76,7 +76,9 @@ public class DecideZoneController {
 	@RequestMapping("/modifypage")
 	public String modifyPage(String id,Model model) {
 		BcDecidedzone decidedzone = decideZoneService.findById(id);
+		String[] subareaid = decideZoneService.findSubarea(id);
 		model.addAttribute("decidedzone", decidedzone);
+		model.addAttribute("subareaid", subareaid);
 		return "/basic/decidezone/modifyform";
 		
 	}
