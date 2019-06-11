@@ -29,4 +29,6 @@ public interface BcDecidedzoneMapper {
     int updateByPrimaryKey(BcDecidedzone record);
 
 	List<BcDecidedzone> queryDecidedzone(BcDecidedzone decidedzone);
+
+	int delDecidezone(String[] ids);
 }

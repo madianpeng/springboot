@@ -40,4 +40,6 @@ public interface BcSubareaMapper {
 
 	List<BcSubarea> querySubarea4Decided(BcSubarea subarea);
 
+	int deleteDecidezone(String[] ids);
+
 }	

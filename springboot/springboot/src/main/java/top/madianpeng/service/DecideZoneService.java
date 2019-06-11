@@ -29,5 +29,17 @@ public interface DecideZoneService {
 	 * @return
 	 */
 	String[] findSubarea(String id);
+	/**
+	 * 保存修改
+	 * @param decidedzone
+	 * @return
+	 */
+	ReturnValue modifyDecidezone(BcDecidedzone decidedzone);
+	/**
+	 * 删除定区
+	 * @param ids
+	 * @return
+	 */
+	ReturnValue delDecidezone(String[] ids);
 
 }

@@ -17,8 +17,9 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label">定区名称</label>
 				<div class="layui-input-inline">
+					<input type="hidden" name="id" th:value="${decidedzone.id}">
 					<input type="text" name="name" th:value="${decidedzone.name}" lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-					<input type="hidden" name="subareaid" lay-verify="transferrequired" id="subareaid" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+					<input type="hidden" name="subareaid" lay-verify="transferrequired" id="subareaid">
 				</div>
 			</div>
 			<div class="layui-form-item">

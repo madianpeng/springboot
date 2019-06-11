@@ -3,6 +3,7 @@ package top.madianpeng.serviceimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.transaction.TransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,44 @@ public class DecideZoneServiceImpl implements DecideZoneService {
 			ids[i]=list.get(i).getId();
 		}
 		return ids;
+	}
+	@Override
+	public ReturnValue modifyDecidezone(BcDecidedzone decidedzone) {
+		ReturnValue returnValue = new ReturnValue();
+		String[] split = decidedzone.getSubareaid().split(",");
+		String id = decidedzone.getId();
+		String[] ids = new String[1];
+		ids[0] =id;
+		List<BcSubarea>  list = new ArrayList<BcSubarea>();
+		for (String subareaid : split) {
+			BcSubarea bcSubarea = new BcSubarea();
+			bcSubarea.setId(subareaid);
+			bcSubarea.setDecidedzoneId(id);
+			list.add(bcSubarea);
+		}
+		try {
+			mapper.updateByPrimaryKey(decidedzone);
+			subareaMapper.deleteDecidezone(ids);
+			subareaMapper.bindDecidezone(list);
+		} catch (Exception e) {
+			logger.error("修改异常: "+e.getMessage());
+			throw new TransactionException(e);
+		}
+		returnValue.isSuccess("修改");
+		return returnValue;
+	}
+	@Override
+	public ReturnValue delDecidezone(String[] ids) {
+		ReturnValue returnValue = new ReturnValue();
+		try {
+			subareaMapper.deleteDecidezone(ids);
+			mapper.delDecidezone(ids);
+		} catch (Exception e) {
+			logger.error("删除异常: "+e.getMessage());
+			throw new TransactionException(e);
+		}
+		returnValue.isSuccess("删除");
+		return returnValue;
 	}
 
 }

@@ -82,4 +82,28 @@ public class DecideZoneController {
 		return "/basic/decidezone/modifyform";
 		
 	}
+	
+	/**
+	 * 保存修改
+	 * @param decidedzone
+	 * @return
+	 */
+	@RequestMapping("/modifydecidezone")
+	@ResponseBody
+	public ReturnValue modifyDecidezone(BcDecidedzone decidedzone) {
+		ReturnValue returnValue =decideZoneService.modifyDecidezone(decidedzone);
+		return returnValue;
+	}
+	
+	/**
+	 * 删除定区
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("/deldecidezone")
+	@ResponseBody
+	public ReturnValue delDecidezone(String[] ids) {
+		ReturnValue returnValue =decideZoneService.delDecidezone(ids);
+		return returnValue;
+	}
 }
