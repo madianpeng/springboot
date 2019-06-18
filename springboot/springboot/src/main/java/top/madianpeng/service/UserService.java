@@ -1,6 +1,7 @@
 package top.madianpeng.service;
 
 import top.madianpeng.pojo.TbUser;
+import top.madianpeng.pojo.UUser;
 
 public interface UserService {
 	/**
@@ -16,4 +17,6 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean modifyInfo(TbUser tbUser);
+	
+	public UUser selectAllByName(String name);
 }
