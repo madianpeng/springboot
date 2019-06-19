@@ -182,7 +182,7 @@
   <select id="findPermission" resultType="UPermission">
   	SELECT * from u_permission WHERE id IN (SELECT pid FROM u_role_permission WHERE rid in 
   	<foreach collection="list" item="role" open="(" separator="," close="))" >
-  		#{roleid}
+  		#{role.id}
   	</foreach>
   </select>
 </mapper>
